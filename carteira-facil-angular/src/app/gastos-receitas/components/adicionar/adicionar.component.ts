@@ -23,7 +23,7 @@ export class AdicionarComponent implements OnInit {
   form = this.formBuilder.group({
     id: null,
     tipo: [''],
-    data: this.formattedString,
+    data: this.dateValue,
     nome: [''],
     tipoGasto: [''],
     valor: [0.0]
@@ -84,6 +84,7 @@ export class AdicionarComponent implements OnInit {
 
   setToday(){
     this.formattedString = format(new Date(), 'dd/MM/yyyy');
+    this.dateValue = this.formattedString;
   }
 
   dateChanged(valor){

@@ -3,7 +3,7 @@ import { GastoReceita } from '../../model/gasto-receita';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GastoReceitaService } from '../../services/gasto-receita.service';
 import { AlertController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 
 
 @Component({
@@ -16,9 +16,8 @@ export class GastoPage implements OnInit {
   //gastosReceitas: GastoReceita[] = [];
   gastosReceitas$: Observable<GastoReceita[]> | null = null;
   abaSelecionada = 'eventual';
-  gastosFixos: GastoReceita[]; 
-  gastosEventuais: GastoReceita[];
-  resposta= '';
+  gastosFixos: GastoReceita[]=[];
+  gastosEventuais: GastoReceita[]=[];
 
   constructor(
     private service: GastoReceitaService,
@@ -27,6 +26,7 @@ export class GastoPage implements OnInit {
     private alerta: AlertController
   ) {
     this.gastosReceitas$ = this.service.listar().pipe();
+    
   }
 
   ngOnInit() {
@@ -39,51 +39,66 @@ export class GastoPage implements OnInit {
     //   });
   }
 
-  adicionar(){
+  adicionar() {
     this.router.navigate(['adicionar'], { relativeTo: this.route });
   }
 
-  editar(gasto: GastoReceita){
-    this.router.navigate(['editar', gasto.id], {relativeTo: this.route});
+  editar(gasto: GastoReceita) {
+    this.router.navigate(['editar', gasto.id], { relativeTo: this.route });
     if (this.route.params && this.route.params['id']) {
       return this.service.buscarPorId(this.route.params['id']);
     }
   }
 
-  excluir(gasto: GastoReceita){
-    this.mostrarAlerta();
-    
-    if (this.resposta == 'confirm') {
+  async excluir(gasto: GastoReceita) {
+    const alert = await this.alerta.create({
+      message: 'Tem certeza que deseja excluir esse gasto?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'OK',
+          role: 'confirm'
+        }
+      ]
+    })
+
+    await alert.present();
+
+    if ((await alert.onDidDismiss()).role == 'confirm') {
       this.service.deletar(gasto.id).subscribe(() => {
         this.gastosReceitas$ = this.service.listar().pipe();
       });
       console.log("excluido")
-    } 
-        
+    } else{
+      console.log("cancelado")
+    }
   }
 
-  async mostrarAlerta(){
-    const alert = await this.alerta.create({
-      message: 'Tem certeza que deseja excluir esse gasto?',
-      buttons: [ 
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: ()=> {
-            this.resposta = 'cancel';
-          }
-        },
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: ()=> {
-            this.resposta = "confirm";
-          }
-        }
-      ]
-    });
+  // async mostrarAlerta(){
+  //   const alert = await this.alerta.create({
+  //     message: 'Tem certeza que deseja excluir esse gasto?',
+  //     buttons: [ 
+  //       {
+  //         text: 'Cancelar',
+  //         role: 'cancel',
+  //         handler: ()=> {
+  //           this.resposta = 'cancel';
+  //         }
+  //       },
+  //       {
+  //         text: 'OK',
+  //         role: 'confirm',
+  //         handler: ()=> {
+  //           this.resposta = "confirm";
+  //         }
+  //       }
+  //     ]
+  //   })
 
-    console.log(this.resposta);
-    await alert.present();
-  }
+  //   await alert.present(); 
+
+  // }
 }
