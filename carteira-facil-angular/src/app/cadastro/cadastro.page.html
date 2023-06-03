@@ -1,0 +1,59 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/login">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div id="container">
+    <h1>CARTEIRA FÁCIL</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-list>
+        <div [ngClass]="aplicaCssErro('nome')"> 
+          <ion-item>
+            <ion-input formControlName="nome" placeholder="Seu nome"></ion-input>
+            <app-controle-erro
+              [mostrarErro]="verificaValidTouched('nome')"
+              mensagemErro="Nome inválido">
+            </app-controle-erro>
+          </ion-item>
+        </div>
+        <ion-item>
+          <ion-input formControlName="email" placeholder="Seu email"></ion-input>
+          <app-controle-erro
+            [mostrarErro]="verificaValidTouched('email')"
+            mensagemErro="Email inválido">
+          </app-controle-erro>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="telefone" placeholder="Seu telefone"></ion-input>
+          <app-controle-erro
+            [mostrarErro]="verificaTelefone('telefone')"
+            mensagemErro="Telefone inválido">
+          </app-controle-erro>
+        </ion-item>
+        <ion-item>
+          <ion-input id="senha" formControlName="senha" placeholder="Nova senha"></ion-input>
+          <app-mensagem-erro [control]="form.get('senha')" label="Senha"></app-mensagem-erro>
+          <app-controle-erro [mostrarErro]="verificaSenha('senha')"
+            mensagemErro="Senha inválida!">
+          </app-controle-erro>
+        </ion-item>
+        <ion-item>
+          <ion-input id="confirmarSenha" formControlName="confirmarSenha" placeholder="Confirmar senha"></ion-input>
+          <app-controle-erro [mostrarErro]="form.get('confirmarSenha').hasError('igualA')"
+            mensagemErro="Senhas não são iguais.">
+          </app-controle-erro>
+        </ion-item>
+      </ion-list>
+      <ion-button (click)="adicionar()" type="submit" 
+        id="botao-cadastro" size="full" shape="round"
+        [disabled]="!form.valid">
+        Cadastre-se
+      </ion-button>
+    </form>
+    
+    
+  </div>
+</ion-content>

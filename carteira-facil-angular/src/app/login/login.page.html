@@ -1,0 +1,43 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <form [formGroup]="form">
+      <h1>CARTEIRA FÁCIL</h1>
+      <ion-list>
+        <ion-item>
+          <ion-label class="legenda">Email</ion-label>
+          <ion-input [(ngModel)]="usuario.email" 
+            type="email"
+            formControlName="email">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="legenda">Senha</ion-label>
+          <ion-input [(ngModel)]="usuario.senha" clearOnEdit 
+            type="password"
+            formControlName="senha">
+          </ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button id="botao-entrar" class="label-botao" 
+              type="submit" size="full" shape="round"
+              (click)="fazerLogin()">
+              Entrar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button class="label-botao" size="full" shape="round" fill="outline" routerLink="/cadastro">Criar nova conta</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button class="label-botao" size="full" shape="round" fill="outline" routerLink="/esqueceu-senha">Esqueceu a senha?
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,156 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button routerLink="/adicionar">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title id="titulo">Lista de Desejo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-list>
+      <ion-item>
+        <ion-label>Nome</ion-label>
+        <ion-input class="input-lista" placeholder="Ex: Roupas"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Categoria</ion-label>
+        <ion-select cancelText="Cancelar" placeholder="Selecionar">
+          <ion-select-option value="viagem">Viagem</ion-select-option>
+          <ion-select-option value="outros">Outros</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Valor</ion-label>
+        <ion-input class="input-lista" placeholder="Ex: R$0,00"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Prazo</ion-label>
+        <ion-input class="input-lista" placeholder="Ex: 2 meses"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button id="botao-full" size="full" shape="round">Confirmar</ion-button>
+    <ion-button size="full" shape="round" fill="outline">Cancelar</ion-button>
+
+    <ion-list id="lista-desejo">
+      <h2>Listas de Desejos</h2>
+      <ion-item href="#">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h5>Celular</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Prazo:</h6>
+            </ion-col>
+            <ion-col>
+              <p>2 meses</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Economizar:</h6>
+            </ion-col>
+            <ion-col>
+              <p>R$550,00/mês</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Valor:</h6>
+            </ion-col>
+            <ion-col>
+              <p>R$1100,00</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button size="small">
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button size="small">
+                <ion-icon name="trash-sharp"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item href="#">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h5>Viagem EUA</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Prazo:</h6>
+            </ion-col>
+            <ion-col>
+              <p>6 meses</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Economizar:</h6>
+            </ion-col>
+            <ion-col>
+              <p>R$500,00/mês</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Hopedagem:</h6>
+            </ion-col>
+            <ion-col>
+              <p>R$500,00</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Alimentação:</h6>
+            </ion-col>
+            <ion-col>
+              <p>R$500,00</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Passagem:</h6>
+            </ion-col>
+            <ion-col>
+              <p>R$500,00</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6>Valor:</h6>
+            </ion-col>
+            <ion-col>
+              <p>R$1500,00</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button size="small">
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button size="small">
+                <ion-icon name="trash-sharp"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

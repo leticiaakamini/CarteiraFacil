@@ -1,0 +1,27 @@
+<ion-content>
+  <ion-header collapse="fade">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button routerLink="/principal">
+          <ion-icon class="icon-header" name="arrow-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title id="titulo">Receita</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="adicionar()">
+          <ion-icon class="icon-header" name="add-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+      <ion-card *ngFor="let receita of receitas">
+        <ion-card-header>
+          <ion-card-title> {{ receita.nome }} </ion-card-title>
+          <ion-card-subtitle> {{ receita.data }} </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>R$ {{ receita.valor }} </ion-card-content>
+      </ion-card>
+  </div>
+</ion-content>

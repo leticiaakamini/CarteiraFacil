@@ -1,0 +1,29 @@
+<ion-content>
+  <ion-header collapse="fade">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button routerLink="/renda">
+          <ion-icon class="icon-header" name="arrow-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title id="titulo">Nova Receita</ion-title>      
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-list id="lista-gasto">
+      <form [formGroup]="form">
+        <ion-item>
+          <ion-label class="legenda">Nome</ion-label>
+          <ion-input formControlName="nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="legenda">Valor</ion-label>
+          <ion-input formControlName="valor"></ion-input>
+        </ion-item>
+      </form>
+    </ion-list>
+    <ion-button (click)="adicionar()" class="botao-full" size="full" shape="round">Adicionar</ion-button>
+    <ion-button (click)="cancelar()" size="full" shape="round" fill="outline">Cancelar</ion-button>
+  </div>
+</ion-content>

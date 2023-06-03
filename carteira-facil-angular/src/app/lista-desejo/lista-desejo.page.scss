@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+ion-content{
+    --background: linear-gradient(to top, #33cccc 0%, #006666 100%);
+}
+
+ion-toolbar{
+    --background: none;
+    color: #fff;
+}
+
+#titulo{
+    padding-top: 3px;
+    padding-right: 14%;
+    font-size: 19px;
+    text-align: center;
+}
+
+#container{
+    padding: 10px;
+}
+
+.input-lista{
+    text-align: right;
+    font-size: 13px;
+    --placeholder-opacity: 60%;
+    font-weight: 550;
+    opacity: 55%;
+}
+
+ion-select{
+    font-size: 13px;
+    --placeholder-opacity: 60%;
+}
+
+ion-select::part(text){
+    font-size: 14px;
+    opacity: 70%;
+    font-weight: 530;
+}
+
+ion-select::part(text), ion-select::part(placeholder){
+    flex: 0 0 auto;
+}
+
+#botao-full{
+    --background: #004b4d;
+    color: #fff;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#botao-full:hover{
+    color: #000;
+    transition: all 300ms ease-in-out;
+}
+
+ion-button[fill='outline']{
+    color:#004b4d;
+    --border-color: #004b4d;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+ion-button[fill='outline']:hover{
+    color: #fff;
+    transition: all 300ms ease-in-out;
+}
+
+ion-list{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10%;
+    padding: 10px;
+}
+
+#lista-desejo{
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 10%;
+}
+
+h2{
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #004b4d;
+    text-align: center;
+}
+
+h5{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #004b4d;
+}
+
+h6{
+    font-size: 14px;
+    font-weight:500;
+    padding: 5px;
+}
+
+p{
+    font-size: 12px;
+    padding: 6px;
+}
+
+ion-button[size='small']{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 25%;
+    margin-right: 25%;
+    --background:#004b4d;
+}

@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Bitter', serif;
+}
+
+ion-content{
+    --background: linear-gradient(to top, #33cccc 0%, #006666 100%);
+}
+
+.menu-itens{
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 60px 30px;
+    justify-content: center;
+}
+
+.menu-itens-inferior{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+ion-header{
+    height: 40px;
+    margin-top: 20px;
+}
+
+ion-toolbar{
+    --background: none;
+    text-align: center;    
+}
+
+ion-menu-button{
+    color: #fff;
+}
+
+ion-title{
+    font-size: 20px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+ion-card{
+    margin: 20px 30px;
+    padding: 20px;
+}
+
+#extrato{
+    height: 13%;
+}
+
+.titulo-card{
+    font-size: 20px;
+    font-weight: 500;
+    color:#004b4d;
+    padding: 5px;
+    text-transform: uppercase;
+}
+
+#titulo-lista{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 5px;
+    color:#004b4d;
+}
+
+#botao-concluido{
+    font-size: 8px;
+    --background: #004b4d;
+}
+
+#botao-concluido:hover{
+    color: #000;
+    transition: all ease-in-out 300ms;
+}
+
+ion-button[fill='outline']{
+    font-size: 8px;
+    --background: none;
+    color:#004b4d;
+    --border-color: #004b4d;
+}
+
+ion-button[fill='outline']:hover{
+    color: #000;
+    transition: all ease-in-out 300ms;
+}
+
+.itens{
+    --background:#004b4d;
+    color: #fff;
+}
+
+ion-tabs{
+    position: relative;
+    height: 10%;
+}
+
+ion-select::part(icon){
+    margin-left: 150px;
+    position: absolute; 
+}
+
+ion-select::part(placeholder), ion-select::part(text){
+    margin-right: 50px;    
+    font-size: 16px;
+} 
+
+.topicos{
+    font-size: 14px;
+}
+
+AlertController{
+    border-radius: 20%;
+    color:#000;
+}

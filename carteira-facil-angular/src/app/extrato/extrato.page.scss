@@ -1,0 +1,53 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0; 
+    font-family: 'Bitter', serif;
+}
+
+#container {
+    padding: 20px;
+}
+
+ion-content{
+    --background: linear-gradient(to top, #33cccc 0%, #006666 100%);
+}
+
+ion-header{
+    height: 40px;
+    margin-top: 20px;
+}
+
+ion-toolbar{
+    --background: none;
+    color: #fff;
+}
+
+.icon-header{
+    color: #fff;
+    margin: 10px;
+}
+
+#titulo{
+    font-size: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+ion-card{
+    padding-top: 30px;
+    padding-left: 25px;
+}
+
+.gastos-itens {
+    margin-bottom: 3px;
+}
+
+#saldo-atual{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-weight: 500;
+    color: #004b4d;
+}
+

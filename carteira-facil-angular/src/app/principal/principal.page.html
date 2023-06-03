@@ -1,0 +1,116 @@
+<ion-content>
+  <ion-menu contentId="main-content">
+    <ion-content>
+      <a (click)="navegar('gasto')" class="menu-itens">Gastos</a>
+      <a (click)="navegar('receita')" class="menu-itens">Receita</a>
+      <a (click)="navegar('lista')" class="menu-itens">Lista de Desejos</a>
+      <div class="menu-itens-inferior">
+        <a href="alterar-dados" class="menu-itens">Alterar Dados</a>
+        <a href="" class="menu-itens">Sair</a>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <div id="main-content">
+    <ion-header collapse="fade">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button auto-hide="false"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Carteira Fácil</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  </div> 
+
+  <ion-card id="extrato" routerLink="/extrato">
+    <ion-card-header>
+      <ion-card-subtitle class="titulo-card">Saldo atual</ion-card-subtitle>
+      <ion-card-title class="titulo-card">R$ {{ saldoAtual }} </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="titulo-card">Gasto por categoria</ion-card-title><br>
+    </ion-card-header>
+    <ion-row>
+      <ion-col>
+        <img src="/assets/graficoo.png">
+      </ion-col>
+      <ion-col>
+        Roupas 25%<br>
+        Eletrodomésticos 5%<br>
+        Alimentação 30%<br>
+        Gastos Fixos 40%
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card id="lista-desejo">
+    <ion-card-header>
+      <ion-card-title class="titulo-card">
+        Lista de Desejo
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-item>
+      <ion-select cancelText="Cancelar" placeholder="Selecionar">
+        <ion-select-option value="viagemEua">Viagem EUA</ion-select-option>
+        <ion-select-option value="notebook">Notebook</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-card-content>
+      <ion-list lines="full">
+        <ion-item class="itens">
+          <ion-label class="topicos">Prazo: 6 meses</ion-label>
+        </ion-item>
+        <ion-item class="itens">
+          <ion-label class="topicos">Economizar:<br>R$500,00/mês</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="topicos">Hopedagem: R$500,00</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="topicos">Alimentação: R$500,00</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="topicos">Passagem: R$500,00</ion-label>
+        </ion-item>
+        <ion-item class="itens">
+          <ion-label class="topicos">Total: R$1500,00</ion-label>
+        </ion-item>
+      </ion-list>
+      <br>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button (click)="alerta()" shape="round" fill="outline">
+              Excluir
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button id="botao-concluido" shape="round">
+              Concluído
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-tabs>
+    <ion-tab-bar >
+      <ion-tab-button tab="principal">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Principal</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button routerLink="/adicionar" tab="adicionar">
+        <ion-icon name="add"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button routerLink="/configuracoes" tab="configuracoes">
+        <ion-icon name="settings-sharp"></ion-icon>
+        <ion-label>Configurações</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>

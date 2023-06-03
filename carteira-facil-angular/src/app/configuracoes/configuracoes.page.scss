@@ -1,0 +1,18 @@
+ion-toolbar{
+    --background: none;
+    color: #fff;
+}
+
+#titulo{
+    font-size: 19px;
+    padding-left: 14%;
+    padding-top: 3px;
+}
+
+ion-content{
+    --background: linear-gradient(to top, #33cccc 0%, #006666 100%);
+}
+
+ion-item{
+    text-align: center;
+}
