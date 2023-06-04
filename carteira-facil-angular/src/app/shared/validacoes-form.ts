@@ -52,4 +52,13 @@ export class ValidacoesForm {
     return null;
   }
 
+  static valorValidator(valor: FormControl){
+    const preco = valor.value;
+
+    if(preco && preco !== ''){
+      const validaPreco = /^[0-9]{1,10}[,][0-9]{2}$/;
+      return validaPreco.test(preco) ? null : {precoInvalido : true}
+    }
+  }
+
 }

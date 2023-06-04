@@ -1,47 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { format, parseISO } from 'date-fns';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { GastoReceitaService } from '../../services/gasto-receita.service';
 import { GastoReceita } from '../../model/gasto-receita';
 import { Observable } from 'rxjs';
+import { FormBaseDirective } from 'src/app/shared/form-base/form-base.directive';
+import { ValidacoesForm } from 'src/app/shared/validacoes-form';
 
 @Component({
   selector: 'app-adicionar',
   templateUrl: './adicionar.component.html',
   styleUrls: ['./adicionar.component.scss'],
 })
-export class AdicionarComponent implements OnInit { 
+export class AdicionarComponent extends FormBaseDirective implements OnInit { 
 
   showPicker = false;
   dateValue = '';
   formattedString = '';
   movimentacao = '';
 
-  form = this.formBuilder.group({
-    id: null,
-    tipo: [''],
-    data: this.dateValue,
-    nome: [''],
-    tipoGasto: [''],
-    valor: [0.0]
-  }); 
-
   constructor(
     private formBuilder: FormBuilder,
     private service: GastoReceitaService,
     private toastController: ToastController,
     private location: Location,
-    private router: Router,
     private route: ActivatedRoute
   ) { 
-  
-    this.setToday();
+    super();
+    //this.setToday();
   }
 
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      id: [null],
+      tipo: [''],
+      data: ['', Validators.required],
+      nome: ['', Validators.required],
+      tipoGasto: ['', Validators.required],
+      valor: ['', [Validators.required, ValidacoesForm.valorValidator]]
+    }); 
+
     this.tipoMovimentacao();
     //const gastoReceita: Observable<GastoReceita>
     this.service.buscarPorId(this.route.snapshot.params.id).subscribe(resposta => {
@@ -59,33 +60,46 @@ export class AdicionarComponent implements OnInit {
   }
 
   adicionar(){
+    this.form.controls['valor'].setValue(
+      this.form.controls['valor'].value.toString().replace(",", ".")
+    )
+
     this.service.salvar(this.form.value).subscribe(
-      resposta => console.log(resposta)
+      () => this.mensagemSucesso(),
+      () => this.mensagemErro()
     );
 
     console.log(this.formattedString);
     console.log(this.form.value);
-    this.salvarSucesso();
-    //this.cancelar();
   }
 
   cancelar(){
     this.location.back();
   }
 
-  async salvarSucesso(){
+  async mensagemSucesso(){
     const toast = await this.toastController.create({
-      message: 'Gasto salvo com sucesso!',
+      message: 'Salvo com sucesso!',
       duration: 5000,
     });
 
-    toast.present();
+    await toast.present();
+    this.cancelar();
   }
 
-  setToday(){
-    this.formattedString = format(new Date(), 'dd/MM/yyyy');
-    this.dateValue = this.formattedString;
+  async mensagemErro(){
+    const toast = await this.toastController.create({
+      message: 'Erro ao salvar!',
+      duration: 5000,
+    });
+
+    await toast.present();
   }
+
+  // setToday(){
+  //   this.formattedString = format(new Date(), 'dd/MM/yyyy');
+  //   this.dateValue = this.formattedString;
+  // }
 
   dateChanged(valor){
     this.dateValue = valor;
@@ -97,7 +111,14 @@ export class AdicionarComponent implements OnInit {
       this.movimentacao = 'Gasto';
     } else if (this.route.snapshot.pathFromRoot[1].routeConfig.path == 'receita') {
       this.movimentacao = 'Receita';
-    };
+    }
   }
 
+  onSubmit(){
+    console.log(this.form)
+  }
+
+  validaValor(valor){
+    return !this.form.get(valor).valid && this.verificaValidTouched(valor);
+  }
 }

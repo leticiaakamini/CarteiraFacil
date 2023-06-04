@@ -7,6 +7,7 @@ import { GastoPage } from './components/gasto/gasto.page';
 import { AdicionarComponent } from './components/adicionar/adicionar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { IonicModule } from '@ionic/angular';
     GastosReceitasRoutingModule,
     FormsModule,
     IonicModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class GastosReceitasModule { }

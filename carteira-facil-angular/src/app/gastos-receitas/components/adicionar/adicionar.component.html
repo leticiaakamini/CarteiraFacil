@@ -12,10 +12,14 @@
 
   <div id="container">
     <ion-list id="lista-gasto">
-      <form [formGroup]="form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <ion-item>
           <ion-label class="legenda">Nome</ion-label>
           <ion-input formControlName="nome"></ion-input>
+          <app-controle-erro
+            [mostrarErro]="verificaValidTouched('nome')"
+            mensagemErro="Insira um nome">
+          </app-controle-erro>
         </ion-item>
 
         <ion-item (click)="showPicker = !showPicker">
@@ -28,6 +32,10 @@
           size="cover" 
           (ionChange)="dateChanged(datetime.value)">
         </ion-datetime>
+        <app-controle-erro
+          [mostrarErro]="verificaValidTouched('data')"
+          mensagemErro="Insira uma data">
+        </app-controle-erro>
 
         <ion-item *ngIf="movimentacao == 'Gasto'">
           <ion-label class="legenda">Tipo</ion-label>
@@ -47,15 +55,26 @@
             <ion-select-option value="viagem">Viagem</ion-select-option>
             <ion-select-option value="outro">Outro</ion-select-option>
           </ion-select>
+          <app-controle-erro
+            [mostrarErro]="verificaValidTouched('tipoGasto')"
+            mensagemErro="Insira um tipo">
+          </app-controle-erro>
         </ion-item>
 
         <ion-item>
           <ion-label class="legenda">Valor</ion-label>
           <ion-input formControlName="valor"></ion-input>
+          <app-controle-erro
+            [mostrarErro]="validaValor('valor')"
+            mensagemErro="Insira um valor válido">
+          </app-controle-erro>
         </ion-item>
       </form>
     </ion-list>
-    <ion-button (click)="adicionar()" class="botao-full" size="full" shape="round">Adicionar</ion-button>
+    <ion-button (click)="adicionar()" class="botao-full" 
+      size="full" shape="round" [disabled]="!form.valid">
+      Adicionar
+    </ion-button>
     <ion-button (click)="cancelar()" size="full" shape="round" fill="outline">Cancelar</ion-button>
   </div>
 </ion-content>

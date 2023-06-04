@@ -15,12 +15,11 @@ export class GastoReceitaService {
     return this.httpClient.get<GastoReceita[]>(this.API);
   }
 
-  buscarPorId(id: string){
+  buscarPorId(id: number){
     return this.httpClient.get<GastoReceita>(`${this.API}/${id}`)
   }
 
   salvar(gasto: GastoReceita){
-    console.log(gasto);
     if (gasto.id) {
       console.log("update")
       return this.atualizar(gasto);
