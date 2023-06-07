@@ -6,7 +6,7 @@
           <ion-icon class="icon-header" name="arrow-back-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title id="titulo">Adicionar {{ movimentacao }}</ion-title>
+      <ion-title id="titulo">{{ adicionarOuEditar }} {{ movimentacao }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -63,7 +63,7 @@
 
         <ion-item>
           <ion-label class="legenda">Valor</ion-label>
-          <ion-input formControlName="valor"></ion-input>
+          <ion-input formControlName="valor" placeholder="Ex: R$20,00"></ion-input>
           <app-controle-erro
             [mostrarErro]="validaValor('valor')"
             mensagemErro="Insira um valor válido">

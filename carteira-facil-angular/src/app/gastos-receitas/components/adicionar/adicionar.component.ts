@@ -21,6 +21,7 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
   dateValue = '';
   formattedString = '';
   movimentacao = '';
+  adicionarOuEditar = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,20 +31,32 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
     private route: ActivatedRoute
   ) { 
     super();
-    //this.setToday();
+    this.setToday();
   }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      id: [null],
-      tipo: [''],
-      data: ['', Validators.required],
-      nome: ['', Validators.required],
-      tipoGasto: ['', Validators.required],
-      valor: ['', [Validators.required, ValidacoesForm.valorValidator]]
-    }); 
-
     this.tipoMovimentacao();
+
+    if (this.movimentacao == 'Gasto') {
+      this.form = this.formBuilder.group({
+        id: [null],
+        tipo: ['Gasto'],
+        data: ['', Validators.required],
+        nome: ['', Validators.required],
+        tipoGasto: ['', Validators.required],
+        valor: ['', [Validators.required, ValidacoesForm.valorValidator]]
+      }); 
+    } else {
+      this.form = this.formBuilder.group({
+        id: [null],
+        tipo: ['Receita'],
+        data: ['', Validators.required],
+        nome: ['', Validators.required],
+        tipoGasto: [null],
+        valor: ['', [Validators.required, ValidacoesForm.valorValidator]]
+      }); 
+    }
+
     //const gastoReceita: Observable<GastoReceita>
     this.service.buscarPorId(this.route.snapshot.params.id).subscribe(resposta => {
       this.form.setValue({
@@ -55,7 +68,7 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
         valor: resposta.valor
       })
       console.log(resposta)
-      console.log(this.route.snapshot.pathFromRoot[1].routeConfig.path)
+      console.log(this.route.snapshot.url[0].path)
     });
   }
 
@@ -96,10 +109,10 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
     await toast.present();
   }
 
-  // setToday(){
-  //   this.formattedString = format(new Date(), 'dd/MM/yyyy');
-  //   this.dateValue = this.formattedString;
-  // }
+  setToday(){
+    this.formattedString = format(new Date(), 'dd/MM/yyyy');
+    this.dateValue = this.formattedString;
+  }
 
   dateChanged(valor){
     this.dateValue = valor;
@@ -111,6 +124,12 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
       this.movimentacao = 'Gasto';
     } else if (this.route.snapshot.pathFromRoot[1].routeConfig.path == 'receita') {
       this.movimentacao = 'Receita';
+    }
+
+    if (this.route.snapshot.url[0].path == 'adicionar') {
+      this.adicionarOuEditar = 'adicionar'
+    } else if (this.route.snapshot.url[0].path == 'editar') {
+      this.adicionarOuEditar = 'editar'
     }
   }
 

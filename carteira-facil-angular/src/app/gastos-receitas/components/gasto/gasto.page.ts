@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GastoReceita } from '../../model/gasto-receita';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GastoReceitaService } from '../../services/gasto-receita.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Observable, pipe } from 'rxjs';
 
 
@@ -23,7 +23,8 @@ export class GastoPage implements OnInit {
     private service: GastoReceitaService,
     private router: Router,
     private route: ActivatedRoute,
-    private alerta: AlertController
+    private alerta: AlertController,
+    private toastController: ToastController
   ) {
     this.gastosReceitas$ = this.service.listar().pipe();
     
@@ -70,6 +71,7 @@ export class GastoPage implements OnInit {
     if ((await alert.onDidDismiss()).role == 'confirm') {
       this.service.deletar(gasto.id).subscribe(() => {
         this.gastosReceitas$ = this.service.listar().pipe();
+        this.excluidoSucesso();
       });
       console.log("excluido")
     } else{
@@ -77,28 +79,12 @@ export class GastoPage implements OnInit {
     }
   }
 
-  // async mostrarAlerta(){
-  //   const alert = await this.alerta.create({
-  //     message: 'Tem certeza que deseja excluir esse gasto?',
-  //     buttons: [ 
-  //       {
-  //         text: 'Cancelar',
-  //         role: 'cancel',
-  //         handler: ()=> {
-  //           this.resposta = 'cancel';
-  //         }
-  //       },
-  //       {
-  //         text: 'OK',
-  //         role: 'confirm',
-  //         handler: ()=> {
-  //           this.resposta = "confirm";
-  //         }
-  //       }
-  //     ]
-  //   })
+  async excluidoSucesso(){
+    const toast = await this.toastController.create({
+      message: 'Gasto removido com sucesso!',
+      duration: 5000,
+    });
 
-  //   await alert.present(); 
-
-  // }
+    await toast.present();
+  }
 }

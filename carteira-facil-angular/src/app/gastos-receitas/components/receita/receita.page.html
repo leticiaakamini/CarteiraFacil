@@ -16,10 +16,26 @@
   </ion-header>
 
   <div id="container">
-      <ion-card *ngFor="let receita of receitas">
+      <ion-card *ngFor="let receita of gastosReceitas$ | async">
         <ion-card-header>
-          <ion-card-title> {{ receita.nome }} </ion-card-title>
-          <ion-card-subtitle> {{ receita.data }} </ion-card-subtitle>
+          <ion-card-title> 
+            <ion-grid>
+              <ion-row class="nome-gasto">
+                <ion-col size="8">
+                  {{ receita.nome }}
+                </ion-col>
+                <ion-col size="4">
+                  <ion-button (click)="editar(receita)" fill="clear" class="botao-editar-excluir">
+                    <ion-icon class="icones" name="pencil-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="excluir(receita)" fill="clear" class="botao-editar-excluir">
+                    <ion-icon class="icones" name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-title>
+          <ion-card-subtitle> {{ receita.data | date: "dd/MM/yyyy"}} </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>R$ {{ receita.valor }} </ion-card-content>
       </ion-card>

@@ -5,8 +5,8 @@ import { ReceitaPage } from './components/receita/receita.page';
 import { GastoPage } from './components/gasto/gasto.page';
 
 const routes: Routes = [
-  {path: '', component: GastoPage},
-  {path: 'receita', component: ReceitaPage},
+  {path: 'gasto', component: GastoPage},
+  {path: '', component: ReceitaPage},
   {path: 'adicionar', component: AdicionarComponent},
   {path: 'editar/:id', component: AdicionarComponent}
 ];

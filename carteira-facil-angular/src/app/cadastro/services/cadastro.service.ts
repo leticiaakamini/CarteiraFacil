@@ -14,4 +14,8 @@ export class CadastroService {
   adicionar(cadastro: Cadastro){
     return this.httpClient.post<Cadastro>(this.API, cadastro);
   }
+
+  listar(){
+    return this.httpClient.get<Cadastro[]>(this.API);
+  }
 }
