@@ -4,6 +4,7 @@ import { GastoReceitaService } from '../../services/gasto-receita.service';
 import { GastoReceita } from '../../model/gasto-receita';
 import { Observable } from 'rxjs';
 import { AlertController, ToastController } from '@ionic/angular';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-receita',
@@ -12,8 +13,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class ReceitaPage implements OnInit {
 
-  receitas: GastoReceita[] = [];
-  gastosReceitas$: Observable<GastoReceita[]> | null = null;
+  receitas$: Observable<GastoReceita[]> | null = null;
 
   constructor(
     private service: GastoReceitaService,
@@ -21,16 +21,10 @@ export class ReceitaPage implements OnInit {
     private route: ActivatedRoute,
     private alerta: AlertController,
     private toastController: ToastController
-  ) {
-    this.gastosReceitas$ = this.service.listar().pipe();
-  }
+  ) {}
 
   ngOnInit() {
-    this.service.listar()
-      .subscribe(resposta => {
-        this.receitas = resposta;
-        this.receitas = this.receitas.filter(gasto => gasto.tipoGasto == null)
-      });
+    this.atualizarReceita();
   }
 
   adicionar(){
@@ -46,7 +40,7 @@ export class ReceitaPage implements OnInit {
 
   async excluir(receita: GastoReceita) {
     const alert = await this.alerta.create({
-      message: 'Tem certeza que deseja excluir essa receita?',
+      message: 'Tem certeza de que deseja excluir essa receita?',
       buttons: [
         {
           text: 'Cancelar',
@@ -63,7 +57,7 @@ export class ReceitaPage implements OnInit {
 
     if ((await alert.onDidDismiss()).role == 'confirm') {
       this.service.deletar(receita.id).subscribe(() => {
-        this.gastosReceitas$ = this.service.listar().pipe();
+        this.atualizarReceita();
         this.excluidoSucesso();
       });
       console.log("excluido")
@@ -79,5 +73,13 @@ export class ReceitaPage implements OnInit {
     });
 
     await toast.present();
+  }
+
+  atualizarReceita(){
+    this.receitas$ = this.service.listar().pipe(
+      map(
+        (receitas: GastoReceita[]) => receitas.filter(receita => receita.tipo == 'Receita')
+      )
+    );
   }
 }

@@ -21,7 +21,7 @@
     </ion-header>
   </div> 
 
-  <ion-card id="extrato" routerLink="/extrato">
+  <ion-card id="extrato" (click)="navegar('extrato')">
     <ion-card-header>
       <ion-card-subtitle class="titulo-card">Saldo atual</ion-card-subtitle>
       <ion-card-title class="titulo-card">R$ {{ saldoAtual }} </ion-card-title>

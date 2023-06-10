@@ -6,7 +6,7 @@ import { GastoPage } from './components/gasto/gasto.page';
 
 const routes: Routes = [
   {path: 'gasto', component: GastoPage},
-  {path: '', component: ReceitaPage},
+  {path: 'receita', component: ReceitaPage},
   {path: 'adicionar', component: AdicionarComponent},
   {path: 'editar/:id', component: AdicionarComponent}
 ];

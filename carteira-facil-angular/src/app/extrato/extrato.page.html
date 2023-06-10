@@ -18,9 +18,6 @@
             <ion-col size="2">
               <h5>DATA</h5>
             </ion-col>
-            <!-- <ion-col size="2">
-              <h5>TIPO</h5>
-            </ion-col> -->
             <ion-col size="7">
               <h5>NOME</h5>
             </ion-col>
@@ -28,32 +25,15 @@
               <h5>VALOR</h5>
             </ion-col>
           </ion-row>
-          <ion-row class="gastos-itens" *ngFor="let gasto of gastos">
+          <ion-row class="gastos-itens" *ngFor="let gastoReceita of gastosReceitas">
             <ion-col size="2">
-              <!-- colocar data -->
+              {{ gastoReceita.data | date: "dd/MM"}}
             </ion-col>
-            <!-- <ion-col size="2"> 
-              {{ gasto.tipo }}
-            </ion-col> -->
             <ion-col size="7">
-              {{ gasto.nome }}
+              {{ gastoReceita.nome }}
             </ion-col>
             <ion-col size="3">
-              - {{ gasto.valor }}
-            </ion-col>
-          </ion-row>
-          <ion-row class="gastos-itens" *ngFor="let receita of receitas">
-            <ion-col size="2">
-              <!-- colocar data -->
-            </ion-col>
-            <!-- <ion-col size="2">
-              {{ gasto.tipo }}
-            </ion-col> -->
-            <ion-col size="7">
-              {{ receita.nome }}
-            </ion-col>
-            <ion-col size="3">
-              + {{ receita.valor }}
+              - {{ gastoReceita.valor }}
             </ion-col>
           </ion-row>
         </ion-grid>

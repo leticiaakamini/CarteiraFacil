@@ -12,7 +12,7 @@ export class ExtratoPage implements OnInit {
   saldoAtual: number = 0;
   gastoTotal = 0;
   receitaTotal = 0;
-  gastosReceitas: GastoReceita[];
+  gastosReceitas: GastoReceita[]=[];
 
   constructor(
     private service: GastoReceitaService
@@ -23,6 +23,8 @@ export class ExtratoPage implements OnInit {
       this.gastosReceitas = resposta
       //this.calcularSaldo()
     });
+
+    //this.gastosReceitas = this.service.listar().pipe();
   }
 
   //incompleto 
@@ -32,4 +34,6 @@ export class ExtratoPage implements OnInit {
   //   this.receitas.forEach(receita => this.receitaTotal = receita.valor + this.receitaTotal);
   //   this.saldoAtual = this.receitaTotal - this.gastoTotal;
   // }
+
+  
 }

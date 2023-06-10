@@ -3,7 +3,8 @@ import { GastoReceita } from '../../model/gasto-receita';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GastoReceitaService } from '../../services/gasto-receita.service';
 import { AlertController, ToastController } from '@ionic/angular';
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
 
 
 @Component({
@@ -13,11 +14,9 @@ import { Observable, pipe } from 'rxjs';
 })
 export class GastoPage implements OnInit {
 
-  //gastosReceitas: GastoReceita[] = [];
-  gastosReceitas$: Observable<GastoReceita[]> | null = null;
+  gastosFixos$: Observable<GastoReceita[]> | null = null;
+  gastosEventuais$: Observable<GastoReceita[]> | null = null;
   abaSelecionada = 'eventual';
-  gastosFixos: GastoReceita[]=[];
-  gastosEventuais: GastoReceita[]=[];
 
   constructor(
     private service: GastoReceitaService,
@@ -25,19 +24,11 @@ export class GastoPage implements OnInit {
     private route: ActivatedRoute,
     private alerta: AlertController,
     private toastController: ToastController
-  ) {
-    this.gastosReceitas$ = this.service.listar().pipe();
-    
-  }
+  ) {}
 
   ngOnInit() {
-
-    // this.service.listar()
-    //   .subscribe(resposta => {
-    //     this.gastosReceitas = resposta;
-    //     this.gastosEventuais = this.gastosReceitas.filter(gasto => (gasto.tipoGasto != 'fixo') && (gasto.tipoGasto != null));
-    //     this.gastosFixos = this.gastosReceitas.filter(gasto => gasto.tipoGasto == 'fixo');
-    //   });
+    this.atualizarGastoFixo();
+    this.atualizarGastoEventual();    
   }
 
   adicionar() {
@@ -53,7 +44,7 @@ export class GastoPage implements OnInit {
 
   async excluir(gasto: GastoReceita) {
     const alert = await this.alerta.create({
-      message: 'Tem certeza que deseja excluir esse gasto?',
+      message: 'Tem certeza de que deseja excluir esse gasto?',
       buttons: [
         {
           text: 'Cancelar',
@@ -70,7 +61,12 @@ export class GastoPage implements OnInit {
 
     if ((await alert.onDidDismiss()).role == 'confirm') {
       this.service.deletar(gasto.id).subscribe(() => {
-        this.gastosReceitas$ = this.service.listar().pipe();
+        if (gasto.tipoGasto == 'fixo') {
+          this.atualizarGastoFixo();
+        } else {
+          this.atualizarGastoEventual();
+        }
+        
         this.excluidoSucesso();
       });
       console.log("excluido")
@@ -86,5 +82,21 @@ export class GastoPage implements OnInit {
     });
 
     await toast.present();
+  }
+
+  atualizarGastoFixo(){
+    this.gastosFixos$ = this.service.listar().pipe(
+      map(
+        (gasto: GastoReceita[]) => gasto.filter(gastoFixo => gastoFixo.tipoGasto == 'fixo')
+      )
+    );
+  }
+
+  atualizarGastoEventual(){
+    this.gastosEventuais$ = this.service.listar().pipe(
+      map(
+        (gasto: GastoReceita[]) => gasto.filter(gastoFixo => (gastoFixo.tipoGasto != 'fixo') && (gastoFixo.tipoGasto != null))
+      )
+    );
   }
 }

@@ -34,33 +34,13 @@ const routes: Routes = [
   {
     path: 'extrato',
     loadChildren: () => import('./extrato/extrato.module').then( m => m.ExtratoPageModule),
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'gasto',
-    loadChildren: () => import('./gastos-receitas/gastos-receitas.module').then( m => m.GastosReceitasModule),
     //canActivate: [AuthGuardService]
   },
   {
     path: 'lista-desejo',
     loadChildren: () => import('./lista-desejo/lista-desejo.module').then( m => m.ListaDesejoPageModule),
     canActivate: [AuthGuardService]
-  },
-  {
-    path: 'receita',
-    loadChildren: () => import('./gastos-receitas/gastos-receitas.module').then( m => m.GastosReceitasModule),
-    //canActivate: [AuthGuardService]
-  },
-  // {
-  //   path: 'adicionar',
-  //   loadChildren: () => import('./gastos-receitas/gastos-receitas.module').then( m => m.GastosReceitasModule),
-  //   //canActivate: [AuthGuardService]
-  // },
-  // {
-  //   path: 'adicionar-receita',
-  //   loadChildren: () => import('./receitas/components/adicionar-receita/adicionar-receita.module').then( m => m.AdicionarReceitaModule),
-  //   //canActivate: [AuthGuardService]
-  // }
+  }
 ];
 
 @NgModule({

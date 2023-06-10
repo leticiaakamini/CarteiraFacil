@@ -8,6 +8,9 @@ import { GastoReceita } from '../model/gasto-receita';
 export class GastoReceitaService {
 
   private readonly API = 'api/gasto-receita';
+  gastosFixos: GastoReceita[]=[];
+  gastosEventuais: GastoReceita[]=[];
+  receitas: GastoReceita[]=[];
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,21 +22,21 @@ export class GastoReceitaService {
     return this.httpClient.get<GastoReceita>(`${this.API}/${id}`)
   }
 
-  salvar(gasto: GastoReceita){
-    if (gasto.id) {
+  salvar(gastoReceita: GastoReceita){
+    if (gastoReceita.id) {
       console.log("update")
-      return this.atualizar(gasto);
+      return this.atualizar(gastoReceita);
     }
     console.log("create")
-    return this.adicionar(gasto);
+    return this.adicionar(gastoReceita);
   }
  
-  private adicionar(gasto: GastoReceita){
-    return this.httpClient.post<GastoReceita>(this.API, gasto);
+  private adicionar(gastoReceita: GastoReceita){
+    return this.httpClient.post<GastoReceita>(this.API, gastoReceita);
   }
 
-  private atualizar(gasto: GastoReceita){
-    return this.httpClient.put<GastoReceita>(`${this.API}/${gasto.id}`, gasto);
+  private atualizar(gastoReceita: GastoReceita){
+    return this.httpClient.put<GastoReceita>(`${this.API}/${gastoReceita.id}`, gastoReceita);
   }
 
   deletar(id: number){

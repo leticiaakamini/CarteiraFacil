@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './login/auth.service';
 import { AuthGuardService } from './guards/auth-guard.service';
+import { GastosReceitasModule } from './gastos-receitas/gastos-receitas.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AuthGuardService } from './guards/auth-guard.service';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    GastosReceitasModule
   ],
   providers: [{ 
     provide: RouteReuseStrategy, 
