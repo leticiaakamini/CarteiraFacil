@@ -5,10 +5,17 @@ import { ReceitaPage } from './components/receita/receita.page';
 import { GastoPage } from './components/gasto/gasto.page';
 
 const routes: Routes = [
-  {path: 'gasto', component: GastoPage},
-  {path: 'receita', component: ReceitaPage},
-  {path: 'adicionar', component: AdicionarComponent},
-  {path: 'editar/:id', component: AdicionarComponent}
+  {path: 'gasto', children: [
+    {path: '', component: GastoPage},
+    {path: 'adicionar', component: AdicionarComponent},
+    {path: 'editar/:id', component: AdicionarComponent}
+  ]},
+  {path: 'receita', children: [
+    {path: '', component: ReceitaPage},
+    {path: 'adicionar', component: AdicionarComponent},
+    {path: 'editar/:id', component: AdicionarComponent}
+  ]},
+  
 ];
 
 @NgModule({

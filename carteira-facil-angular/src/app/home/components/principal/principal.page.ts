@@ -1,9 +1,8 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { GastoReceita } from '../gastos-receitas/model/gasto-receita';
-import { GastoReceitaService } from '../gastos-receitas/services/gasto-receita.service';
+import { GastoReceita } from '../../../gastos-receitas/model/gasto-receita';
+import { GastoReceitaService } from '../../../gastos-receitas/services/gasto-receita.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-principal',
@@ -12,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PrincipalPage implements OnInit {
 
-  gastosReceitas: GastoReceita[];
   saldoAtual: number = 0;
   gastoTotal = 0;
   receitaTotal = 0;
@@ -25,17 +23,14 @@ export class PrincipalPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.service.listar().subscribe(resposta => {
-      this.gastosReceitas = resposta
-      //this.calcularSaldo()
-    });
+    this.service.listar().subscribe((gastosReceitas) => this.calcularSaldo(gastosReceitas))
   }
 
   async alerta() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       message: 'Tem certeza de que deseja excluir?',
-      buttons: ['CANCELAR', 'EXCLUIR']
+      buttons: ['CANCELAR', 'EXCLUIR'] 
     });
 
     await alert.present();
@@ -43,14 +38,19 @@ export class PrincipalPage implements OnInit {
     const { role } = await alert.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
-
-  //incompleto
   
-  // calcularSaldo(){
-  //   this.gastos.forEach(gasto => this.gastoTotal = gasto.valor + this.gastoTotal);
-  //   this.receitas.forEach(receita => this.receitaTotal = receita.valor + this.receitaTotal);
-  //   this.saldoAtual = this.receitaTotal - this.gastoTotal;
-  // }
+  calcularSaldo(gastosReceitas: GastoReceita[]){
+    gastosReceitas.forEach(gastoReceita => {
+      if (gastoReceita.tipo == 'Gasto') {
+        gastoReceita.valor = -1 * gastoReceita.valor;
+        this.gastoTotal = gastoReceita.valor + this.gastoTotal;
+      } else {
+        this.receitaTotal = gastoReceita.valor + this.receitaTotal;
+      }
+        
+      this.saldoAtual = this.receitaTotal + this.gastoTotal;
+    })
+  }
 
   navegar(pagina: string){
     this.router.navigate([pagina]);

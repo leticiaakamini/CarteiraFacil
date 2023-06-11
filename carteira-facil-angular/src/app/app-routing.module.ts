@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'principal',
-    loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule),
+    loadChildren: () => import('./home/components/principal/principal.module').then( m => m.PrincipalPageModule),
     //canActivate: [AuthGuardService]
   },
   {
@@ -33,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'extrato',
-    loadChildren: () => import('./extrato/extrato.module').then( m => m.ExtratoPageModule),
+    loadChildren: () => import('./home/components/extrato/extrato.module').then( m => m.ExtratoPageModule),
     //canActivate: [AuthGuardService]
   },
   {

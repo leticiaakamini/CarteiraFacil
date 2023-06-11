@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators'
 })
 export class GastoPage implements OnInit {
 
-  gastosFixos$: Observable<GastoReceita[]> | null = null;
+  gastosEssenciais$: Observable<GastoReceita[]> | null = null;
   gastosEventuais$: Observable<GastoReceita[]> | null = null;
   abaSelecionada = 'eventual';
 
@@ -27,7 +27,7 @@ export class GastoPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.atualizarGastoFixo();
+    this.atualizarGastoEssencial();
     this.atualizarGastoEventual();    
   }
 
@@ -61,8 +61,8 @@ export class GastoPage implements OnInit {
 
     if ((await alert.onDidDismiss()).role == 'confirm') {
       this.service.deletar(gasto.id).subscribe(() => {
-        if (gasto.tipoGasto == 'fixo') {
-          this.atualizarGastoFixo();
+        if (gasto.tipoGasto == 'essencial') {
+          this.atualizarGastoEssencial();
         } else {
           this.atualizarGastoEventual();
         }
@@ -84,10 +84,10 @@ export class GastoPage implements OnInit {
     await toast.present();
   }
 
-  atualizarGastoFixo(){
-    this.gastosFixos$ = this.service.listar().pipe(
+  atualizarGastoEssencial(){
+    this.gastosEssenciais$ = this.service.listar().pipe(
       map(
-        (gasto: GastoReceita[]) => gasto.filter(gastoFixo => gastoFixo.tipoGasto == 'fixo')
+        (gasto: GastoReceita[]) => gasto.filter(gastoEssencial => gastoEssencial.tipoGasto == 'essencial')
       )
     );
   }
@@ -95,7 +95,7 @@ export class GastoPage implements OnInit {
   atualizarGastoEventual(){
     this.gastosEventuais$ = this.service.listar().pipe(
       map(
-        (gasto: GastoReceita[]) => gasto.filter(gastoFixo => (gastoFixo.tipoGasto != 'fixo') && (gastoFixo.tipoGasto != null))
+        (gasto: GastoReceita[]) => gasto.filter(gastoEventual => (gastoEventual.tipoGasto != 'essencial') && (gastoEventual.tipoGasto != null))
       )
     );
   }

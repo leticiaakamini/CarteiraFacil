@@ -8,9 +8,6 @@ import { GastoReceita } from '../model/gasto-receita';
 export class GastoReceitaService {
 
   private readonly API = 'api/gasto-receita';
-  gastosFixos: GastoReceita[]=[];
-  gastosEventuais: GastoReceita[]=[];
-  receitas: GastoReceita[]=[];
 
   constructor(private httpClient: HttpClient) { }
 

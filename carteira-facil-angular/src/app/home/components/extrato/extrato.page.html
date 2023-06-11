@@ -25,7 +25,7 @@
               <h5>VALOR</h5>
             </ion-col>
           </ion-row>
-          <ion-row class="gastos-itens" *ngFor="let gastoReceita of gastosReceitas">
+          <ion-row class="gastos-itens" *ngFor="let gastoReceita of gastosReceitas$ | async">
             <ion-col size="2">
               {{ gastoReceita.data | date: "dd/MM"}}
             </ion-col>
@@ -33,7 +33,7 @@
               {{ gastoReceita.nome }}
             </ion-col>
             <ion-col size="3">
-              - {{ gastoReceita.valor }}
+              {{ gastoReceita.valor }}
             </ion-col>
           </ion-row>
         </ion-grid>
