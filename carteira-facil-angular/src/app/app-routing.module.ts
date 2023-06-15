@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'lista-desejo',
-    loadChildren: () => import('./lista-desejo/lista-desejo.module').then( m => m.ListaDesejoPageModule),
+    loadChildren: () => import('./gastos-receitas/gastos-receitas.module').then( m => m.GastosReceitasModule),
     canActivate: [AuthGuardService]
   }
 ];
