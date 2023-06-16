@@ -37,7 +37,7 @@ public class CarteiraFacilSpringApplication {
 
 			GastoReceita h = new GastoReceita();
 			h.setTipo("Gasto");
-			h.setData("20/05/2023");
+			h.setData("7/09/2023");
 			h.setNome("Sapato Renner");
 			h.setTipoGasto("Calçado");
 			h.setValor(150.20);
