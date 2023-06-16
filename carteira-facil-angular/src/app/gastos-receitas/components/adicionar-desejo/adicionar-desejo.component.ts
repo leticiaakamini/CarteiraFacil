@@ -17,6 +17,8 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
   adicionarOuEditar = '';
   tipoDesejo: string;
   desejoViagem: boolean = false;
+  totalViagem: number = 0;
+  campoVerificado = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -130,5 +132,24 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     });
 
     await toast.present();
+  }
+
+  calcularTotalViagem(valor: string, campo: string){
+
+    console.log(valor)
+    console.log(campo)
+
+    // if (!this.verificaValidTouched(campo)) {
+    //   if (this.campoVerificado != campo) {
+    //     this.campoVerificado = campo;        
+    //   } else {
+    //     this.totalViagem = 0;
+    //   }
+    //   valor = valor.toString().replace(",", ".");
+    //   let campoNumber = parseFloat(valor);
+    //   this.totalViagem = this.totalViagem + campoNumber;     
+      
+    //   console.log(this.totalViagem);
+    // }
   }
 }

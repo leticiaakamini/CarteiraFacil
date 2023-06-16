@@ -42,11 +42,16 @@ ion-toolbar{
 ion-card{
     margin-top: 15px;
     border-radius: 10px;
-    height: 150px;
+    height: 180px;
+    padding: 10px 0px;
+}
+
+.card-viagem{
+    height: 375px;
 }
 
 ion-card-title{
-    padding: 20px;
+    padding: 10px 20px;
     font-size: 18px;
     color: #004b4d;
     font-weight: 500;
@@ -61,7 +66,7 @@ ion-card-subtitle{
     padding-left: 20px;
     color: #004b4d;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     text-transform: capitalize;
 }
 

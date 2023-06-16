@@ -48,7 +48,7 @@
         <div *ngIf="desejoViagem; else desejoBemMaterial">
           <ion-item>
             <ion-label class="legenda">Passagem</ion-label>
-            <ion-input formControlName="passagem" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="passagem" placeholder="Ex: R$20,00" (ionBlur)="calcularTotalViagem($event.target.value, 'passagem')"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -57,7 +57,7 @@
 
           <ion-item>
             <ion-label class="legenda">Hospedagem</ion-label>
-            <ion-input formControlName="hospedagem" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="hospedagem" placeholder="Ex: R$20,00" (ionChange)="calcularTotalViagem($event.target.value, 'hospedagem')"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -120,7 +120,7 @@
 
           <ion-item>
             <ion-label class="legenda">Total</ion-label>
-            <ion-input formControlName="valor" [readonly]="true" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="valor" [readonly]="true" placeholder="Ex: R$20,00" [(ngModel)]="totalViagem"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
