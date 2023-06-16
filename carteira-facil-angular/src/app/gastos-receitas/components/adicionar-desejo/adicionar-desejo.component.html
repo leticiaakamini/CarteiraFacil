@@ -22,7 +22,7 @@
           </app-controle-erro> -->
         </ion-item>
 
-        <ion-radio-group formControlName="tipo">
+        <ion-radio-group formControlName="tipo" [(ngModel)]="tipoDesejo" (ionChange)="escolhaTipoDesejo()">
           <ion-item lines="none">
             <ion-label class="legenda">Tipo</ion-label>
             <ion-label class="legenda-radio" slot="end">Bem material</ion-label>
@@ -120,7 +120,7 @@
 
           <ion-item>
             <ion-label class="legenda">Total</ion-label>
-            <ion-input formControlName="total" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="valor" [readonly]="true" placeholder="Ex: R$20,00"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">

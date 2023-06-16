@@ -21,10 +21,8 @@ export class GastoReceitaService {
 
   salvar(gastoReceita: GastoReceita){
     if (gastoReceita.id) {
-      console.log("update")
       return this.atualizar(gastoReceita);
     }
-    console.log("create")
     return this.adicionar(gastoReceita);
   }
  

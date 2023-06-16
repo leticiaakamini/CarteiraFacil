@@ -79,9 +79,6 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
       () => this.mensagemSucesso(),
       () => this.mensagemErro()
     );
-
-    console.log(this.formattedString);
-    console.log(this.form.value);
   }
 
   cancelar(){
