@@ -61,61 +61,37 @@ ion-card{
     height: 13%;
 }
 
-#titulo-lista{
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
-    padding-bottom: 5px;
+#entradaSaida{
+    padding: 30px;
+    height: 220px;
+}
+
+.legendaEntradaSaida{
     color:#004b4d;
+    font-weight: 300px;
+    //text-align: center;
 }
 
-#botao-concluido{
-    font-size: 8px;
-    --background: #004b4d;
-}
-
-#botao-concluido:hover{
-    color: #000;
-    transition: all ease-in-out 300ms;
-}
-
-ion-button[fill='outline']{
-    font-size: 8px;
-    --background: none;
+.legendaMensagem{
     color:#004b4d;
-    --border-color: #004b4d;
-}
-
-ion-button[fill='outline']:hover{
-    color: #000;
-    transition: all ease-in-out 300ms;
-}
-
-.itens{
-    --background:#004b4d;
-    color: #fff;
-}
-
-ion-tabs{
-    position: relative;
-    height: 10%;
-}
-
-ion-select::part(icon){
-    margin-left: 150px;
-    position: absolute; 
-}
-
-ion-select::part(placeholder), ion-select::part(text){
-    margin-right: 50px;    
+    font-weight: 500;
     font-size: 16px;
-} 
-
-.topicos{
-    font-size: 14px;
+    margin-top: 30px;
+    text-align: center;
 }
 
-AlertController{
-    border-radius: 20%;
-    color:#000;
+.resultadoEntradaSaida{
+    color: #000;
+    font-weight: 500px;
+    font-size: 18px;
+    text-align: center;
 }
+
+.linhaEntradaSaida{
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+
+
+

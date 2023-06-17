@@ -12,8 +12,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PrincipalPage implements OnInit {
 
   saldoAtual: number = 0;
+  saldoAtualFormatado: string;
   gastoTotal = 0;
+  gastoTotalFormatado: string;
   receitaTotal = 0;
+  receitaTotalFormatado: string;
+  mensagem: string = '';
 
   constructor(
     public alertController: AlertController, 
@@ -23,7 +27,7 @@ export class PrincipalPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.service.listar().subscribe((gastosReceitas) => this.calcularSaldo(gastosReceitas))
+    this.service.listar().subscribe((gastosReceitas) => this.calcularSaldo(gastosReceitas));
   }
 
   async alerta() {
@@ -44,15 +48,27 @@ export class PrincipalPage implements OnInit {
       if (gastoReceita.tipo == 'Gasto') {
         gastoReceita.valor = -1 * gastoReceita.valor;
         this.gastoTotal = gastoReceita.valor + this.gastoTotal;
+        this.gastoTotalFormatado = this.gastoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       } else {
         this.receitaTotal = gastoReceita.valor + this.receitaTotal;
+        this.receitaTotalFormatado = this.receitaTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       }
         
       this.saldoAtual = this.receitaTotal + this.gastoTotal;
+      this.saldoAtualFormatado = this.saldoAtual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      this.mostrarMensagem();
     })
   }
 
   navegar(pagina: string){
     this.router.navigate([pagina]);
+  }
+
+  mostrarMensagem(){
+    if (this.saldoAtual > 0) {
+      this.mensagem = 'Você recebeu mais do que gastou!';
+    } else if (this.saldoAtual < 0) {
+      this.mensagem = 'Você gastou mais do que recebeu!'
+    }
   }
 } 

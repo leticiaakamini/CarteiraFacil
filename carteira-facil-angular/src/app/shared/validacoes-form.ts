@@ -56,7 +56,7 @@ export class ValidacoesForm {
     const preco = valor.value;
 
     if(preco && preco !== ''){
-      const validaPreco = /^[0-9]{1,10}[,][0-9]{2}$/;
+      const validaPreco = /^[0-9]{1,10}[,]|[.][0-9]{2}$/;
       return validaPreco.test(preco) ? null : {precoInvalido : true}
     }
   }

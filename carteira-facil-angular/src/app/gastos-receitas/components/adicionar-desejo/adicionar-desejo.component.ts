@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormBaseDirective } from 'src/app/shared/form-base/form-base.directive';
 import { ValidacoesForm } from 'src/app/shared/validacoes-form';
@@ -11,26 +11,44 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-adicionar-desejo',
   templateUrl: './adicionar-desejo.component.html',
   styleUrls: ['./adicionar-desejo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdicionarDesejoComponent extends FormBaseDirective implements OnInit {
+export class AdicionarDesejoComponent extends FormBaseDirective implements OnInit, AfterViewInit {
 
   adicionarOuEditar = '';
   tipoDesejo: string;
   desejoViagem: boolean = false;
   totalViagem: number = 0;
-  campoVerificado = '';
+  totalViagemFormatado: string;
+  camposViagem: string[][] = [
+    ['passagem', ''],
+    ['hospedagem', ''],
+    ['alimentacao', ''],
+    ['transporte', ''],
+    ['compras', ''],
+    ['lazer', ''],
+    ['burocracia', ''],
+    ['gastosExtras', '']
+  ]
 
   constructor(
     private formBuilder: FormBuilder,
     private service: DesejoService,
     private toastController: ToastController,
     private location: Location,
-    private route: ActivatedRoute
-  ) { 
+    private route: ActivatedRoute,
+    private cdRef: ChangeDetectorRef  
+  ) {
     super();
   }
 
+  ngAfterViewInit(): void {
+    this.cdRef.detectChanges();
+  }
+
   ngOnInit() {
+    this.tipoAdicionarEditar();
+
     this.form = this.formBuilder.group({
       id: [null],
       nome: ['', Validators.required],
@@ -48,29 +66,29 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
       burocracia: ['', ValidacoesForm.valorValidator]
     });
 
-    this.service.buscarPorId(this.route.snapshot.params.id).subscribe(resposta => {
-      this.form.setValue({
-        id: resposta.id,
-        nome: resposta.nome,
-        tipo: resposta.tipo,
-        economizar: resposta.economizar,
-        quantiaEconomizada: resposta.quantiaEconomizada,
-        valor: resposta.valor,
-        hospedagem: resposta.hospedagem,
-        alimentacao: resposta.alimentacao,
-        passagem: resposta.passagem,
-        transporte: resposta.transporte,
-        compras: resposta.compras,
-        lazer: resposta.lazer,
-        gastosExtras: resposta.gastosExtras,
-        burocracia: resposta.burocracia
-      })
-      console.log(resposta)
-      console.log(this.route.snapshot.url[0].path)
-    });
+    if(this.adicionarOuEditar == 'editar'){
+      this.service.buscarPorId(this.route.snapshot.params.id).subscribe(resposta => {
+        this.form.setValue({
+          id: resposta.id,
+          nome: resposta.nome,
+          tipo: resposta.tipo,
+          economizar: resposta.economizar,
+          quantiaEconomizada: resposta.quantiaEconomizada,
+          valor: resposta.valor,
+          hospedagem: resposta.hospedagem,
+          alimentacao: resposta.alimentacao,
+          passagem: resposta.passagem,
+          transporte: resposta.transporte,
+          compras: resposta.compras,
+          lazer: resposta.lazer,
+          gastosExtras: resposta.gastosExtras,
+          burocracia: resposta.burocracia
+        })
+      });
+    }
   }
 
-  escolhaTipoDesejo(){
+  escolhaTipoDesejo() {
     if (this.tipoDesejo == 'viagem') {
       this.desejoViagem = true;
     } else {
@@ -78,7 +96,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     }
   }
 
-  adicionar(){
+  adicionar() {
     if (!this.desejoViagem) {
       console.log("bem material")
       this.form.patchValue({
@@ -102,20 +120,18 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
         burocracia: this.form.controls['burocracia'].value.toString().replace(",", "."),
       })
     }
-    
+
     this.service.salvar(this.form.value).subscribe(
       () => this.mensagemSucesso(),
       () => this.mensagemErro()
     );
-
-    console.log(this.form.controls)
   }
 
-  cancelar(){
+  cancelar() {
     this.location.back();
   }
 
-  async mensagemSucesso(){
+  async mensagemSucesso() {
     const toast = await this.toastController.create({
       message: 'Salvo com sucesso!',
       duration: 5000,
@@ -125,7 +141,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     this.cancelar();
   }
 
-  async mensagemErro(){
+  async mensagemErro() {
     const toast = await this.toastController.create({
       message: 'Erro ao salvar!',
       duration: 5000,
@@ -134,22 +150,35 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     await toast.present();
   }
 
-  calcularTotalViagem(valor: string, campo: string){
+  calcularTotalViagem(valor: string, campo: string) {
 
-    console.log(valor)
-    console.log(campo)
+    if (this.form.get(campo).valid) {
+      for (let i = 0; i < this.camposViagem.length; i++) {
+        if (this.camposViagem[i][0] == campo && this.camposViagem[i][1] != '') {
+          this.totalViagem = this.totalViagem - parseFloat(this.camposViagem[i][1]);
+        } 
 
-    // if (!this.verificaValidTouched(campo)) {
-    //   if (this.campoVerificado != campo) {
-    //     this.campoVerificado = campo;        
-    //   } else {
-    //     this.totalViagem = 0;
-    //   }
-    //   valor = valor.toString().replace(",", ".");
-    //   let campoNumber = parseFloat(valor);
-    //   this.totalViagem = this.totalViagem + campoNumber;     
-      
-    //   console.log(this.totalViagem);
-    // }
+        if(this.camposViagem[i][0] == campo) {
+          if (valor == '') {
+            valor = "0,00"
+          }
+          valor = valor.toString().replace(",", ".");
+          this.camposViagem[i][1] = valor;
+          let campoNumber = parseFloat(valor);
+          this.totalViagem = this.totalViagem + campoNumber;
+          this.totalViagemFormatado = this.totalViagem.toFixed(2);
+        }
+      }
+
+      console.log(this.form.controls)
+    }
+  }
+
+  tipoAdicionarEditar(){
+    if (this.route.snapshot.url[0].path == 'adicionar') {
+      this.adicionarOuEditar = 'adicionar'
+    } else if (this.route.snapshot.url[0].path == 'editar') {
+      this.adicionarOuEditar = 'editar'
+    }
   }
 }

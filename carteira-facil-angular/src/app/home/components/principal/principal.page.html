@@ -19,12 +19,12 @@
         <ion-title>Carteira Fácil</ion-title>
       </ion-toolbar>
     </ion-header>
-  </div> 
+  </div>
 
   <ion-card id="extrato" (click)="navegar('extrato')">
     <ion-card-header>
       <ion-card-subtitle class="titulo-card">Saldo atual</ion-card-subtitle>
-      <ion-card-title class="titulo-card">R$ {{ saldoAtual }} </ion-card-title>
+      <ion-card-title class="titulo-card"> {{ saldoAtualFormatado }} </ion-card-title>
     </ion-card-header>
   </ion-card>
 
@@ -45,73 +45,33 @@
     </ion-row>
   </ion-card>
 
-  <ion-card id="lista-desejo">
-    <ion-card-header>
-      <ion-card-title class="titulo-card">
-        Lista de Desejo
-      </ion-card-title>
-    </ion-card-header>
-
-    <ion-item>
-      <ion-select cancelText="Cancelar" placeholder="Selecionar">
-        <ion-select-option value="viagemEua">Viagem EUA</ion-select-option>
-        <ion-select-option value="notebook">Notebook</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-card-content>
-      <ion-list lines="full">
-        <ion-item class="itens">
-          <ion-label class="topicos">Prazo: 6 meses</ion-label>
-        </ion-item>
-        <ion-item class="itens">
-          <ion-label class="topicos">Economizar:<br>R$500,00/mês</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label class="topicos">Hopedagem: R$500,00</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label class="topicos">Alimentação: R$500,00</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label class="topicos">Passagem: R$500,00</ion-label>
-        </ion-item>
-        <ion-item class="itens">
-          <ion-label class="topicos">Total: R$1500,00</ion-label>
-        </ion-item>
-      </ion-list>
-      <br>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="6">
-            <ion-button (click)="alerta()" shape="round" fill="outline">
-              Excluir
-            </ion-button>
-          </ion-col>
-          <ion-col size="6">
-            <ion-button id="botao-concluido" shape="round">
-              Concluído
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
+  <ion-card id="entradaSaida">
+    <ion-grid>
+      <ion-row class="linhaEntradaSaida">
+        <ion-col>
+          <h2 class="legendaEntradaSaida">Entrada: </h2>
+        </ion-col>
+        <ion-col>
+          <p class="resultadoEntradaSaida">{{ receitaTotalFormatado }}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="linhaEntradaSaida">
+        <ion-col>
+          <h2 class="legendaEntradaSaida">Saída: </h2>
+        </ion-col>
+        <ion-col>
+          <p class="resultadoEntradaSaida">{{ gastoTotalFormatado }}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="linhaEntradaSaida">
+        <ion-col>
+          <h2 class="legendaEntradaSaida">Diferença: </h2>
+        </ion-col>
+        <ion-col>
+          <p class="resultadoEntradaSaida">{{ saldoAtualFormatado }}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <h5 class="legendaMensagem">{{ mensagem }}</h5>
   </ion-card>
-
-  <ion-tabs>
-    <ion-tab-bar >
-      <ion-tab-button tab="principal">
-        <ion-icon name="home"></ion-icon>
-        <ion-label>Principal</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button routerLink="/adicionar" tab="adicionar">
-        <ion-icon name="add"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button routerLink="/configuracoes" tab="configuracoes">
-        <ion-icon name="settings-sharp"></ion-icon>
-        <ion-label>Configurações</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+</ion-content>

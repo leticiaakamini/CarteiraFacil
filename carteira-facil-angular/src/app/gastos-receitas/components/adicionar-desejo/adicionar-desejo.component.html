@@ -6,7 +6,7 @@
           <ion-icon class="icon-header" name="arrow-back-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title id="titulo">Adicionar Desejo</ion-title>
+      <ion-title id="titulo">{{ adicionarOuEditar }} Desejo</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -57,7 +57,7 @@
 
           <ion-item>
             <ion-label class="legenda">Hospedagem</ion-label>
-            <ion-input formControlName="hospedagem" placeholder="Ex: R$20,00" (ionChange)="calcularTotalViagem($event.target.value, 'hospedagem')"></ion-input>
+            <ion-input formControlName="hospedagem" placeholder="Ex: R$20,00" (ionBlur)="calcularTotalViagem($event.target.value, 'hospedagem')"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -66,7 +66,7 @@
 
           <ion-item>
             <ion-label class="legenda">Alimentação</ion-label>
-            <ion-input formControlName="alimentacao" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="alimentacao" placeholder="Ex: R$20,00" (ionBlur)="calcularTotalViagem($event.target.value, 'alimentacao')"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -75,7 +75,7 @@
 
           <ion-item>
             <ion-label class="legenda">Transporte</ion-label>
-            <ion-input formControlName="transporte" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="transporte" placeholder="Ex: R$20,00" (ionBlur)="calcularTotalViagem($event.target.value, 'transporte')"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -84,7 +84,7 @@
 
           <ion-item>
             <ion-label class="legenda">Compras</ion-label>
-            <ion-input formControlName="compras" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="compras" placeholder="Ex: R$20,00" (ionBlur)="calcularTotalViagem($event.target.value, 'compras')"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -93,7 +93,7 @@
 
           <ion-item>
             <ion-label class="legenda">Lazer</ion-label>
-            <ion-input formControlName="lazer" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="lazer" placeholder="Ex: R$20,00" (ionBlur)="calcularTotalViagem($event.target.value, 'lazer')"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -102,7 +102,7 @@
 
           <ion-item>
             <ion-label class="legenda">Burocracia</ion-label>
-            <ion-input formControlName="burocracia" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="burocracia" placeholder="Ex: R$20,00" (ionBlur)="calcularTotalViagem($event.target.value, 'burocracia')"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -111,7 +111,7 @@
 
           <ion-item>
             <ion-label class="legenda">Gastos Extras</ion-label>
-            <ion-input formControlName="gastosExtras" placeholder="Ex: R$20,00"></ion-input>
+            <ion-input formControlName="gastosExtras" placeholder="Ex: R$20,00" (ionBlur)="calcularTotalViagem($event.target.value, 'gastosExtras')"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -120,7 +120,7 @@
 
           <ion-item>
             <ion-label class="legenda">Total</ion-label>
-            <ion-input formControlName="valor" [readonly]="true" placeholder="Ex: R$20,00" [(ngModel)]="totalViagem"></ion-input>
+            <ion-input formControlName="valor" [readonly]="true" placeholder="Ex: R$20,00" [(ngModel)]="totalViagemFormatado"></ion-input>
             <!-- <app-controle-erro
               [mostrarErro]="validaValor('valor')"
               mensagemErro="Insira um valor válido">
@@ -158,6 +158,7 @@
         </ion-item>
       </form>
     </ion-list>
+
     <ion-button (click)="adicionar()" class="botao-full" size="full" shape="round" [disabled]="!form.valid">
       Adicionar
     </ion-button>
