@@ -156,6 +156,18 @@
             mensagemErro="Insira um valor válido">
           </app-controle-erro> -->
         </ion-item>
+
+        <ion-item>
+          <ion-button (click)="calcularPrazo()" shape="round">
+            Calcular prazo
+          </ion-button>
+          <ion-label class="legenda">Prazo</ion-label>
+          <ion-input formControlName="prazo" placeholder=""> {{ prazoMesAno | date:'MMM/yyyy':'pt-BR' }} </ion-input>
+          <!-- <app-controle-erro
+            [mostrarErro]="validaValor('valor')"
+            mensagemErro="Insira um valor válido">
+          </app-controle-erro> -->
+        </ion-item>
       </form>
     </ion-list>
 

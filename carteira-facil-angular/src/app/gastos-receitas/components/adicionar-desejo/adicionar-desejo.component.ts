@@ -11,15 +11,16 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-adicionar-desejo',
   templateUrl: './adicionar-desejo.component.html',
   styleUrls: ['./adicionar-desejo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdicionarDesejoComponent extends FormBaseDirective implements OnInit, AfterViewInit {
+export class AdicionarDesejoComponent extends FormBaseDirective implements OnInit { //,AfterViewInit {
 
   adicionarOuEditar = '';
   tipoDesejo: string;
   desejoViagem: boolean = false;
   totalViagem: number = 0;
   totalViagemFormatado: string;
+  prazoMesAno: Date;
   camposViagem: string[][] = [
     ['passagem', ''],
     ['hospedagem', ''],
@@ -37,14 +38,14 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     private toastController: ToastController,
     private location: Location,
     private route: ActivatedRoute,
-    private cdRef: ChangeDetectorRef  
+    //private cdRef: ChangeDetectorRef  
   ) {
     super();
   }
 
-  ngAfterViewInit(): void {
-    this.cdRef.detectChanges();
-  }
+  // ngAfterViewInit(): void {
+  //   this.cdRef.detectChanges();
+  // }
 
   ngOnInit() {
     this.tipoAdicionarEditar();
@@ -63,7 +64,8 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
       compras: ['', ValidacoesForm.valorValidator],
       lazer: ['', ValidacoesForm.valorValidator],
       gastosExtras: ['', ValidacoesForm.valorValidator],
-      burocracia: ['', ValidacoesForm.valorValidator]
+      burocracia: ['', ValidacoesForm.valorValidator],
+      prazo: [null]
     });
 
     if(this.adicionarOuEditar == 'editar'){
@@ -82,7 +84,8 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
           compras: resposta.compras,
           lazer: resposta.lazer,
           gastosExtras: resposta.gastosExtras,
-          burocracia: resposta.burocracia
+          burocracia: resposta.burocracia,
+          prazo: resposta.prazo
         })
       });
     }
@@ -151,7 +154,6 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
   }
 
   calcularTotalViagem(valor: string, campo: string) {
-
     if (this.form.get(campo).valid) {
       for (let i = 0; i < this.camposViagem.length; i++) {
         if (this.camposViagem[i][0] == campo && this.camposViagem[i][1] != '') {
@@ -169,8 +171,29 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
           this.totalViagemFormatado = this.totalViagem.toFixed(2);
         }
       }
+    }
+  }
 
-      console.log(this.form.controls)
+  calcularPrazo(){
+    let dataAtual = new Date(Date.now());
+    let prazoMes = parseFloat(this.form.controls['valor'].value.toString().replace(",", ".")) / parseFloat(this.form.controls['economizar'].value.toString().replace(",", "."));
+
+    if (prazoMes + dataAtual.getMonth() <= 12) {
+      prazoMes = Math.round(dataAtual.getMonth() + prazoMes);
+      this.prazoMesAno = new Date(dataAtual.getFullYear(), prazoMes, 1);
+    } else {
+      let auxAno: number = 0;
+
+      while (prazoMes>=0) {
+        if (prazoMes >= 12) {
+          prazoMes = prazoMes - 12;
+          auxAno++;
+        } else {
+          break;
+        }
+      }
+
+      this.prazoMesAno = new Date(dataAtual.getFullYear()+auxAno, dataAtual.getMonth()+prazoMes, 1);
     }
   }
 

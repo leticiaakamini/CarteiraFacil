@@ -36,8 +36,7 @@ ion-toolbar{
 }
 
 ion-card{
-    padding-top: 30px;
-    padding-left: 25px;
+    padding: 30px 10px;
 }
 
 .gastos-itens {
@@ -46,7 +45,6 @@ ion-card{
 
 #saldo-atual{
     padding-top: 30px;
-    padding-bottom: 30px;
     font-weight: 500;
     color: #004b4d;
 }

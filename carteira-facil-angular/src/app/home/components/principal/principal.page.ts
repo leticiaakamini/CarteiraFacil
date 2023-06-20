@@ -22,8 +22,7 @@ export class PrincipalPage implements OnInit {
   constructor(
     public alertController: AlertController, 
     private service: GastoReceitaService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) { }
 
   ngOnInit() {

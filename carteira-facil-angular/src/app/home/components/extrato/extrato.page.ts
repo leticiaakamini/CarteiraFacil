@@ -12,9 +12,9 @@ import { Observable } from 'rxjs';
 export class ExtratoPage implements OnInit {
 
   saldoAtual: number = 0;
+  saldoAtualFormatado: string;
   gastoTotal = 0;
   receitaTotal = 0;
-  //gastosReceitas: GastoReceita[]=[];
   gastosReceitas$: Observable<GastoReceita[]> | null = null;
 
   constructor(
@@ -46,6 +46,7 @@ export class ExtratoPage implements OnInit {
         this.receitaTotal = gastoReceita.valor + this.receitaTotal;
       }
       this.saldoAtual = this.receitaTotal + this.gastoTotal;
+      this.saldoAtualFormatado = this.saldoAtual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       return gastoReceita;
     })
     return gastosReceitas;
