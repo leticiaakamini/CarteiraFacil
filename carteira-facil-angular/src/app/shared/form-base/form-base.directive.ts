@@ -32,5 +32,4 @@ export abstract class FormBaseDirective implements OnInit{
       'has-feedback': this.verificaValidTouched(campo)
     };
   }
-
 }

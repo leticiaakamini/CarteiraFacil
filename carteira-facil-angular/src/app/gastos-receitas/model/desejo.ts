@@ -2,7 +2,7 @@ export interface Desejo {
     id: number;
     nome: string;
     tipo: string;
-    prazo: Date;
+    prazo: string;
     economizar: number;
     quantiaEconomizada: number;
     valor: number;

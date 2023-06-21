@@ -20,7 +20,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
   desejoViagem: boolean = false;
   totalViagem: number = 0;
   totalViagemFormatado: string;
-  prazoMesAno: Date;
+  prazoMesAno: string;
   camposViagem: string[][] = [
     ['passagem', ''],
     ['hospedagem', ''],
@@ -65,26 +65,26 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
       lazer: ['', ValidacoesForm.valorValidator],
       gastosExtras: ['', ValidacoesForm.valorValidator],
       burocracia: ['', ValidacoesForm.valorValidator],
-      prazo: [null]
+      prazo: ['']
     });
 
-    if(this.adicionarOuEditar == 'editar'){
+    if (this.adicionarOuEditar == 'editar') {
       this.service.buscarPorId(this.route.snapshot.params.id).subscribe(resposta => {
         this.form.setValue({
           id: resposta.id,
           nome: resposta.nome,
           tipo: resposta.tipo,
-          economizar: resposta.economizar,
-          quantiaEconomizada: resposta.quantiaEconomizada,
-          valor: resposta.valor,
-          hospedagem: resposta.hospedagem,
-          alimentacao: resposta.alimentacao,
-          passagem: resposta.passagem,
-          transporte: resposta.transporte,
-          compras: resposta.compras,
-          lazer: resposta.lazer,
-          gastosExtras: resposta.gastosExtras,
-          burocracia: resposta.burocracia,
+          economizar: resposta.economizar.toFixed(2),
+          quantiaEconomizada: resposta.quantiaEconomizada.toFixed(2),
+          valor: resposta.valor.toFixed(2),
+          hospedagem: resposta.hospedagem.toFixed(2),
+          alimentacao: resposta.alimentacao.toFixed(2),
+          passagem: resposta.passagem.toFixed(2),
+          transporte: resposta.transporte.toFixed(2),
+          compras: resposta.compras.toFixed(2),
+          lazer: resposta.lazer.toFixed(2),
+          gastosExtras: resposta.gastosExtras.toFixed(2),
+          burocracia: resposta.burocracia.toFixed(2),
           prazo: resposta.prazo
         })
       });
@@ -100,27 +100,24 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
   }
 
   adicionar() {
-    if (!this.desejoViagem) {
-      console.log("bem material")
-      this.form.patchValue({
-        economizar: this.form.controls['economizar'].value.toString().replace(",", "."),
-        quantiaEconomizada: this.form.controls['quantiaEconomizada'].value.toString().replace(",", "."),
-        valor: this.form.controls['valor'].value.toString().replace(",", "."),
-      })
-    } else {
+    this.form.patchValue({
+      economizar: parseFloat(this.form.controls['economizar'].value.replace(",", ".")).toFixed(2),
+      quantiaEconomizada: parseFloat(this.verificaCampoVazio('quantiaEconomizada')).toFixed(2),
+      valor: parseFloat(this.form.controls['valor'].value.replace(",", ".")).toFixed(2),
+      prazo: this.prazoMesAno
+    })
+
+    if (this.desejoViagem) {
       console.log("viagem")
       this.form.patchValue({
-        economizar: this.form.controls['economizar'].value.toString().replace(",", "."),
-        quantiaEconomizada: this.form.controls['quantiaEconomizada'].value.toString().replace(",", "."),
-        valor: this.form.controls['valor'].value.toString().replace(",", "."),
-        hospedagem: this.form.controls['hospedagem'].value.toString().replace(",", "."),
-        alimentacao: this.form.controls['alimentacao'].value.toString().replace(",", "."),
-        passagem: this.form.controls['passagem'].value.toString().replace(",", "."),
-        transporte: this.form.controls['transporte'].value.toString().replace(",", "."),
-        compras: this.form.controls['compras'].value.toString().replace(",", "."),
-        lazer: this.form.controls['lazer'].value.toString().replace(",", "."),
-        gastosExtras: this.form.controls['gastosExtras'].value.toString().replace(",", "."),
-        burocracia: this.form.controls['burocracia'].value.toString().replace(",", "."),
+        hospedagem: parseFloat(this.verificaCampoVazio('hospedagem')).toFixed(2),
+        alimentacao: parseFloat(this.verificaCampoVazio('alimentacao')).toFixed(2),
+        passagem: parseFloat(this.verificaCampoVazio('passagem')).toFixed(2),
+        transporte: parseFloat(this.verificaCampoVazio('transporte')).toFixed(2),
+        compras: parseFloat(this.verificaCampoVazio('compras')).toFixed(2),
+        lazer: parseFloat(this.verificaCampoVazio('lazer')).toFixed(2),
+        gastosExtras: parseFloat(this.verificaCampoVazio('gastosExtras')).toFixed(2),
+        burocracia: parseFloat(this.verificaCampoVazio('burocracia')).toFixed(2)
       })
     }
 
@@ -128,6 +125,14 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
       () => this.mensagemSucesso(),
       () => this.mensagemErro()
     );
+  }
+
+  verificaCampoVazio(campo: string) {
+    if (this.form.get(campo).value == '') {
+      return '0.00';
+    } else {
+      return this.form.controls[campo].value.replace(",", ".");
+    }
   }
 
   cancelar() {
@@ -155,49 +160,39 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
 
   calcularTotalViagem(valor: string, campo: string) {
     if (this.form.get(campo).valid) {
-      for (let i = 0; i < this.camposViagem.length; i++) {
-        if (this.camposViagem[i][0] == campo && this.camposViagem[i][1] != '') {
-          this.totalViagem = this.totalViagem - parseFloat(this.camposViagem[i][1]);
-        } 
+      for (const element of this.camposViagem) {
+        if (element[0] == campo && element[1] != '') {
+          this.totalViagem = this.totalViagem - parseFloat(element[1]);
+        }
 
-        if(this.camposViagem[i][0] == campo) {
+        if (element[0] == campo) {
           if (valor == '') {
-            valor = "0,00"
+            valor = "0.00"
           }
-          valor = valor.toString().replace(",", ".");
-          this.camposViagem[i][1] = valor;
-          let campoNumber = parseFloat(valor);
-          this.totalViagem = this.totalViagem + campoNumber;
+          valor = valor.replace(",", ".");
+          element[1] = valor;
+          this.totalViagem = this.totalViagem + parseFloat(valor);
           this.totalViagemFormatado = this.totalViagem.toFixed(2);
         }
       }
     }
   }
 
-  calcularPrazo(){
+  calcularPrazo() {
     let dataAtual = new Date(Date.now());
-    let prazoMes = parseFloat(this.form.controls['valor'].value.toString().replace(",", ".")) / parseFloat(this.form.controls['economizar'].value.toString().replace(",", "."));
+    let prazoMes = Math.round(parseFloat(this.form.controls['valor'].value.replace(",", ".")) / parseFloat(this.form.controls['economizar'].value.replace(",", ".")));
+    let auxAno: number = 0;
 
-    if (prazoMes + dataAtual.getMonth() <= 12) {
-      prazoMes = Math.round(dataAtual.getMonth() + prazoMes);
-      this.prazoMesAno = new Date(dataAtual.getFullYear(), prazoMes, 1);
-    } else {
-      let auxAno: number = 0;
+    prazoMes = prazoMes + (dataAtual.getMonth() + 1);
 
-      while (prazoMes>=0) {
-        if (prazoMes >= 12) {
-          prazoMes = prazoMes - 12;
-          auxAno++;
-        } else {
-          break;
-        }
-      }
-
-      this.prazoMesAno = new Date(dataAtual.getFullYear()+auxAno, dataAtual.getMonth()+prazoMes, 1);
+    while (prazoMes > 12) {
+      auxAno++;
+      prazoMes = prazoMes - 12;
     }
+    this.prazoMesAno = (prazoMes) + '/' + (dataAtual.getFullYear() + auxAno);
   }
 
-  tipoAdicionarEditar(){
+  tipoAdicionarEditar() {
     if (this.route.snapshot.url[0].path == 'adicionar') {
       this.adicionarOuEditar = 'adicionar'
     } else if (this.route.snapshot.url[0].path == 'editar') {
