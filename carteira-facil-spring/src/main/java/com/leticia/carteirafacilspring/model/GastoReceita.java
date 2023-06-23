@@ -5,12 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter 
 @Entity
+@Table(name = "gastos_receitas")
 public class GastoReceita {
 
     @Id
@@ -31,4 +33,7 @@ public class GastoReceita {
 
     @Column(name = "valor", nullable = false)
     private double valor;
+
+    @Column(name = "id_usuario", nullable = false)
+    private int idUsuario;
 }

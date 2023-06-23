@@ -1,16 +1,20 @@
 package com.leticia.carteirafacilspring.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "desejos")
 public class Desejo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -57,4 +61,7 @@ public class Desejo {
 
     @Column(name = "burocracia", nullable = true)
     private double burocracia;
+
+    @Column(name = "id_usuario", nullable = false)
+    private int idUsuario;
 }
