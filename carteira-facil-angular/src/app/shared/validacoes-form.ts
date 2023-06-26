@@ -60,5 +60,4 @@ export class ValidacoesForm {
       return validaPreco.test(preco) ? null : {precoInvalido : true}
     }
   }
-
 }

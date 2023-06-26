@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GastoReceitaService } from '../../services/gasto-receita.service';
 import { FormBaseDirective } from 'src/app/shared/form-base/form-base.directive';
 import { ValidacoesForm } from 'src/app/shared/validacoes-form';
+import { LoginPage } from 'src/app/login/login.page';
 
 @Component({
   selector: 'app-adicionar',
@@ -42,7 +43,8 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
         data: ['', Validators.required],
         nome: ['', Validators.required],
         tipoGasto: ['', Validators.required],
-        valor: ['', [Validators.required, ValidacoesForm.valorValidator]]
+        valor: ['', [Validators.required, ValidacoesForm.valorValidator]],
+        idUsuario: [null]
       }); 
     } else {
       this.form = this.formBuilder.group({
@@ -51,34 +53,40 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
         data: ['', Validators.required],
         nome: ['', Validators.required],
         tipoGasto: [null],
-        valor: ['', [Validators.required, ValidacoesForm.valorValidator]]
+        valor: ['', [Validators.required, ValidacoesForm.valorValidator]],
+        idUsuario: [null]
       }); 
     }
 
-    //const gastoReceita: Observable<GastoReceita>
-    this.service.buscarPorId(this.route.snapshot.params.id).subscribe(resposta => {
-      this.form.setValue({
-        id: resposta.id,
-        nome: resposta.nome,
-        data: resposta.data,
-        tipo: resposta.tipo,
-        tipoGasto: resposta.tipoGasto,
-        valor: resposta.valor
-      })
-      console.log(resposta)
-      console.log(this.route.snapshot.url[0].path)
-    });
+    if (this.adicionarOuEditar == 'editar') {
+      this.service.buscarPorId(this.route.snapshot.params.id).subscribe(resposta => {
+        this.form.setValue({
+          id: resposta.id,
+          nome: resposta.nome,
+          data: resposta.data,
+          tipo: resposta.tipo,
+          tipoGasto: resposta.tipoGasto,
+          valor: resposta.valor.toFixed(2),
+          idUsuario: resposta.idUsuario
+        })
+      });
+    }    
   }
 
   adicionar(){
-    this.form.controls['valor'].setValue(
-      this.form.controls['valor'].value.toString().replace(",", ".")
-    )
+    this.form.patchValue({
+      data: this.formattedString,
+      valor: parseFloat(this.form.controls['valor'].value.replace(",", ".")).toFixed(2)
+    })
 
     this.service.salvar(this.form.value).subscribe(
-      () => this.mensagemSucesso(),
+      resposta => {
+        this.mensagemSucesso()
+        console.log(resposta)
+      },
       () => this.mensagemErro()
     );
+    console.log(this.form.value)
   }
 
   cancelar(){

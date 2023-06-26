@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { GastoReceita } from '../../../gastos-receitas/model/gasto-receita';
 import { GastoReceitaService } from '../../../gastos-receitas/services/gasto-receita.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginPage } from 'src/app/login/login.page';
 
 @Component({
   selector: 'app-principal',

@@ -3,42 +3,33 @@ import { Usuario } from './usuario';
 import { Router } from '@angular/router';
 import { CadastroService } from '../cadastro/services/cadastro.service';
 import { Cadastro } from '../cadastro/model/cadastro';
+import { GastoReceita } from '../gastos-receitas/model/gasto-receita';
+import { Desejo } from '../gastos-receitas/model/desejo';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  emailCadastrado: Cadastro;
-  usuarioAutenticado: boolean;
-  usuariosCadastrados: Cadastro[] = [];
+  private readonly API = 'api/usuario';
 
+  usuarioAutenticado: boolean;
 
   constructor(
-    private router: Router,
-    private cadastroService: CadastroService
+    private httpClient: HttpClient
   ) { 
-    this.cadastroService.listar().subscribe(resposta => 
-      this.usuariosCadastrados = resposta
-    )
-
     this.usuarioAutenticado = false;
   }
 
   fazerLogin(usuarioLogin: Usuario){
-
-    this.usuariosCadastrados.find(usuario => {
-      if (usuarioLogin.email == usuario.email && usuarioLogin.senha == usuario.senha) {
-
-        this.usuarioAutenticado = true;
-        this.router.navigate(['/principal']);
-      }
-    })
-
-    if (!this.usuarioAutenticado) {
-      this.emailCadastrado = this.usuariosCadastrados.find(usuario => usuarioLogin.email == usuario.email && usuarioLogin.senha !== usuario.senha);
-    }
+    return this.httpClient.post<Usuario>(this.API, usuarioLogin);
   }
+
+  // fazerLogin(usuarioLogin: Usuario){
+  //   let verificacao = this.httpClient.post<Usuario>(this.API, usuarioLogin);
+  //   return verificacao
+  // }
 
   usuarioEstaAutenticado(){
     return this.usuarioAutenticado;

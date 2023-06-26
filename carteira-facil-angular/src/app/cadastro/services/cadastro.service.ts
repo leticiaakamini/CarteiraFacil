@@ -7,12 +7,12 @@ import { Cadastro } from '../model/cadastro';
 })
 export class CadastroService {
 
-  private readonly API = 'api/cadastro';
+  private readonly API = 'api/usuario';
 
   constructor(private httpClient: HttpClient) { }
 
   adicionar(cadastro: Cadastro){
-    return this.httpClient.post<Cadastro>(this.API, cadastro);
+    return this.httpClient.post<Cadastro>(`${this.API}/cadastro`, cadastro);
   }
 
   listar(){

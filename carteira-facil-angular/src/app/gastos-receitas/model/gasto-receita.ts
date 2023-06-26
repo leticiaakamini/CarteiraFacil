@@ -5,4 +5,5 @@ export interface GastoReceita {
     nome: string;
     tipoGasto: string;
     valor: number;
+    idUsuario: number;
 }

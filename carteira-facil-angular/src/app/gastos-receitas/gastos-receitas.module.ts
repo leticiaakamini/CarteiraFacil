@@ -10,6 +10,7 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '../shared/shared.module';
 import { ListaDesejoPage } from './components/lista-desejo/lista-desejo.page';
 import { AdicionarDesejoComponent } from './components/adicionar-desejo/adicionar-desejo.component';
+import { LoginPage } from '../login/login.page';
 
 @NgModule({
   declarations: [

@@ -1,14 +1,14 @@
 <ion-content>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button routerLink="/login">
+      <ion-button (click)="cancelar()">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <div id="container">
     <h1>CARTEIRA FÁCIL</h1>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form">
       <ion-list>
         <div [ngClass]="aplicaCssErro('nome')"> 
           <ion-item>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GastoReceitaService } from '../../../gastos-receitas/services/gasto-receita.service';
 import { GastoReceita } from '../../../gastos-receitas/model/gasto-receita';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -32,7 +32,18 @@ export class ExtratoPage implements OnInit {
     );
   }
 
+  formatarData(gastoReceita: GastoReceita[]){
+    return gastoReceita.map((ab) => ab.data.substring(0,5))
+  }
+
   ordenarDatas(gastosReceitas: GastoReceita[]){
+    gastosReceitas.forEach((gastoReceita: GastoReceita) => {
+      let data = gastoReceita.data;
+      let arrayData = data.split('/');
+      let dataFormatada = arrayData[1] + '/' + arrayData[0] + '/' + arrayData[2]
+      let dataDate = new Date(dataFormatada)
+    })
+
     gastosReceitas.sort((a,b) => new Date(a.data).getTime() - new Date(b.data).getTime())
     return gastosReceitas
   }
