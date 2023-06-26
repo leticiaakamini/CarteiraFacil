@@ -24,9 +24,11 @@ public class GastoReceitaController {
     
     private final GastoReceitaRepository repository;
 
+    UsuarioController usuario;
+
     @GetMapping
     public List<GastoReceita> listar(){
-        return repository.findAll();
+        return repository.buscarGastosReceitas(usuario.buscarIdUsuario());
     }
 
     @GetMapping("/{id}")
@@ -37,8 +39,12 @@ public class GastoReceitaController {
     }
 
     @PostMapping
-    public GastoReceita criar(@RequestBody GastoReceita gastoReceita){
-        return repository.save(gastoReceita);
+    public ResponseEntity<GastoReceita> criar(@RequestBody GastoReceita gastoReceita){
+        
+        final Long idUsuario = usuario.buscarIdUsuario();
+        gastoReceita.setIdUsuario(idUsuario);
+        repository.save(gastoReceita);
+        return ResponseEntity.ok().body(gastoReceita);
     }
 
     @PutMapping("/{id}")

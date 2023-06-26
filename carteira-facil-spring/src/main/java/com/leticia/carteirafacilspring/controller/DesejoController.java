@@ -22,11 +22,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class DesejoController {
 
-    private DesejoRepository repository;
+    private final DesejoRepository repository;
+
+    UsuarioController usuario;
 
     @GetMapping
     public List<Desejo> listar(){
-        return repository.findAll();
+        return repository.buscarDesejos(usuario.buscarIdUsuario());
     }
 
     @GetMapping("/{id}")
@@ -37,8 +39,11 @@ public class DesejoController {
     }
 
     @PostMapping
-    public Desejo criar(@RequestBody Desejo desejo){
-        return repository.save(desejo);
+    public ResponseEntity<Desejo> criar(@RequestBody Desejo desejo){  
+        final Long idUsuario = usuario.buscarIdUsuario();      
+        desejo.setIdUsuario(idUsuario);
+        repository.save(desejo);
+        return ResponseEntity.ok().body(desejo);
     }
 
     @PutMapping("/{id}")

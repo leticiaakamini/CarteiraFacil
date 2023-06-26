@@ -5,9 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+
+@NamedQuery(name = "GastoReceita.buscarGastosReceitas", query = "select gr from GastoReceita gr where gr.idUsuario=:idUsuario")
 
 @Getter
 @Setter 
@@ -35,5 +38,5 @@ public class GastoReceita {
     private double valor;
 
     @Column(name = "id_usuario", nullable = false)
-    private int idUsuario;
+    private Long idUsuario;
 }

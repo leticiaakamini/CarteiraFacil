@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.leticia.carteirafacilspring.model.Cadastro;
 import com.leticia.carteirafacilspring.model.GastoReceita;
-import com.leticia.carteirafacilspring.repository.CadastroRepository;
+import com.leticia.carteirafacilspring.repository.UsuarioRepository;
 import com.leticia.carteirafacilspring.repository.GastoReceitaRepository;
 
 @SpringBootApplication
@@ -25,7 +25,7 @@ public class CarteiraFacilSpringApplication {
 		@Autowired
 		GastoReceitaRepository gastoRepository,
 		@Autowired
-		CadastroRepository cadastroRepository
+		UsuarioRepository usuarioRepository
 	){
 		return  args -> {
 			// gastoRepository.deleteAll();

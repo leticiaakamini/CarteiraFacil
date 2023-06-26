@@ -7,9 +7,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+
+@NamedQuery(name = "Desejo.buscarDesejos", query = "select d from Desejo d where d.idUsuario =: idUsuario")
 
 @Getter
 @Setter
@@ -63,5 +66,5 @@ public class Desejo {
     private double burocracia;
 
     @Column(name = "id_usuario", nullable = false)
-    private int idUsuario;
+    private Long idUsuario;
 }

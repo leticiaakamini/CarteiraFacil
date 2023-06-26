@@ -5,9 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+
+@NamedQuery(name = "Cadastro.emailEncontrado", query = "select c from Cadastro c where c.email=:email")
+@NamedQuery(name = "Cadastro.usuarioAutenticado", query = "select c from Cadastro c where c.email=:email and c.senha=:senha")
 
 @Getter
 @Setter
