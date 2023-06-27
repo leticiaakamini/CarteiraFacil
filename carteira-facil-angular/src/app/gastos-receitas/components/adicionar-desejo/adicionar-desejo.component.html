@@ -12,7 +12,7 @@
 
   <div id="container">
     <ion-list id="form-desejo">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form">
         <ion-item>
           <ion-label class="legenda">Nome</ion-label>
           <ion-input formControlName="nome"></ion-input>
@@ -26,7 +26,7 @@
           <ion-item lines="none">
             <ion-label class="legenda">Tipo</ion-label>
             <ion-label class="legenda-radio" slot="end">Bem material</ion-label>
-            <ion-radio value="bem-material" justify="end"></ion-radio>
+            <ion-radio value="bem-material" justify="end" [disabled]="adicionarOuEditar == 'editar'"></ion-radio>
 
             <!-- <app-controle-erro
                 [mostrarErro]="verificaValidTouched('nome')"
@@ -36,7 +36,7 @@
           <ion-item>
             <ion-label class="legenda"></ion-label>
             <ion-label class="legenda-radio" slot="end">Viagem</ion-label>
-            <ion-radio value="viagem" justify="end"></ion-radio>
+            <ion-radio value="viagem" justify="end" [disabled]="adicionarOuEditar == 'editar'"></ion-radio>
 
             <!-- <app-controle-erro
                 [mostrarErro]="verificaValidTouched('nome')"

@@ -18,22 +18,32 @@
             <ion-col size="2">
               <h5>DATA</h5>
             </ion-col>
-            <ion-col size="7">
+            <ion-col size="6.5">
               <h5>NOME</h5>
             </ion-col>
-            <ion-col size="3">
+            <ion-col size="3.5">
               <h5>VALOR</h5>
             </ion-col>
           </ion-row>
           <ion-row class="gastos-itens" *ngFor="let gastoReceita of gastosReceitas$ | async">
             <ion-col size="2">
-             {{ gastoReceita.data }}
+             {{ retornarDate(gastoReceita.data) | date:"dd/MM"}}
             </ion-col>
-            <ion-col size="7">
+            <ion-col size="6.5" >
               {{ gastoReceita.nome }}
             </ion-col>
-            <ion-col size="3">
-              R$ {{ gastoReceita.valor }}
+            <ion-col size="3.5">
+              <div class="valor">
+                <div class="sinal" *ngIf="gastoReceita.tipo == 'Gasto'; else Receita">
+                  - 
+                </div>
+                <ng-template #Receita>
+                  <div class="sinal">
+                    +
+                  </div>
+                </ng-template>
+                R$ {{ gastoReceita.valor }}               
+              </div>
             </ion-col>
           </ion-row>
         </ion-grid>

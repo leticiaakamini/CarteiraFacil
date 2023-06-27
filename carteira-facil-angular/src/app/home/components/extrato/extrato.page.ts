@@ -32,31 +32,29 @@ export class ExtratoPage implements OnInit {
     );
   }
 
-  formatarData(gastoReceita: GastoReceita[]){
-    return gastoReceita.map((ab) => ab.data.substring(0,5))
-  }
+  // formatarData(gastoReceita: GastoReceita[]){
+  //   return gastoReceita.map((ab) => ab.data.substring(0,5))
+  // }
 
   ordenarDatas(gastosReceitas: GastoReceita[]){
-    gastosReceitas.forEach((gastoReceita: GastoReceita) => {
-      let data = gastoReceita.data;
-      let arrayData = data.split('/');
-      let dataFormatada = arrayData[1] + '/' + arrayData[0] + '/' + arrayData[2]
-      let dataDate = new Date(dataFormatada)
-    })
+    return gastosReceitas.sort((a,b) => new Date(this.retornarDate(a.data)).getTime() - new Date(this.retornarDate(b.data)).getTime());
+  }
 
-    gastosReceitas.sort((a,b) => new Date(a.data).getTime() - new Date(b.data).getTime())
-    return gastosReceitas
+  retornarDate(data: string){
+    let arrayData = data.split('/');
+    let dataFormatada = arrayData[1] + '/' + arrayData[0] + '/' + arrayData[2];
+    let dataDate = new Date(dataFormatada);
+    return dataDate;
   }
 
   calcularSaldo(gastosReceitas: GastoReceita[]){
     gastosReceitas.forEach(gastoReceita => {
       if (gastoReceita.tipo == 'Gasto') {
-        gastoReceita.valor = -1 * gastoReceita.valor;
         this.gastoTotal = gastoReceita.valor + this.gastoTotal;
       } else {
         this.receitaTotal = gastoReceita.valor + this.receitaTotal;
       }
-      this.saldoAtual = this.receitaTotal + this.gastoTotal;
+      this.saldoAtual = this.receitaTotal - this.gastoTotal;
       this.saldoAtualFormatado = this.saldoAtual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       return gastoReceita;
     })

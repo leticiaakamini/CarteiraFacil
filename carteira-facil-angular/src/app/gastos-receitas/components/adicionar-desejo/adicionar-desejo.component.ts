@@ -11,9 +11,9 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-adicionar-desejo',
   templateUrl: './adicionar-desejo.component.html',
   styleUrls: ['./adicionar-desejo.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdicionarDesejoComponent extends FormBaseDirective implements OnInit { //,AfterViewInit {
+export class AdicionarDesejoComponent extends FormBaseDirective implements OnInit, AfterViewInit {
 
   adicionarOuEditar = '';
   tipoDesejo: string;
@@ -29,7 +29,8 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     ['compras', ''],
     ['lazer', ''],
     ['burocracia', ''],
-    ['gastosExtras', '']
+    ['gastosExtras', ''],
+    ['total', '']
   ]
 
   constructor(
@@ -38,14 +39,14 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     private toastController: ToastController,
     private location: Location,
     private route: ActivatedRoute,
-    //private cdRef: ChangeDetectorRef  
+    private cdRef: ChangeDetectorRef  
   ) {
     super();
   }
 
-  // ngAfterViewInit(): void {
-  //   this.cdRef.detectChanges();
-  // }
+  ngAfterViewInit(): void {
+    this.cdRef.detectChanges();
+  }
 
   ngOnInit() {
     this.tipoAdicionarEditar();
@@ -88,9 +89,36 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
           burocracia: resposta.burocracia.toFixed(2),
           prazo: resposta.prazo,
           idUsuario: resposta.idUsuario
-        })
+        });
+
+        this.setTipoDesejo(resposta.tipo);
+
+        // let total = resposta.hospedagem + 
+        //             resposta.alimentacao + 
+        //             resposta.passagem + 
+        //             resposta.transporte + 
+        //             resposta.compras + 
+        //             resposta.lazer + 
+        //             resposta.gastosExtras + 
+        //             resposta.burocracia;
+
+        // this.totalViagemFormatado = total.toString();
+
+        this.calcularTotalViagem(resposta.hospedagem.toFixed(2), 'hospedagem')
+        this.calcularTotalViagem(resposta.alimentacao.toFixed(2), 'alimentacao')
+        this.calcularTotalViagem(resposta.passagem.toFixed(2), 'passagem')
+        this.calcularTotalViagem(resposta.transporte.toFixed(2), 'transporte')
+        this.calcularTotalViagem(resposta.compras.toFixed(2), 'compras')
+        this.calcularTotalViagem(resposta.lazer.toFixed(2), 'lazer')
+        this.calcularTotalViagem(resposta.gastosExtras.toFixed(2), 'gastosExtras')
+        this.calcularTotalViagem(resposta.burocracia.toFixed(2), 'burocracia')
       });
     }
+  }
+
+  setTipoDesejo(tipo){
+    this.tipoDesejo = tipo;
+    this.escolhaTipoDesejo();
   }
 
   escolhaTipoDesejo() {
@@ -112,7 +140,6 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     })
 
     if (this.desejoViagem) {
-      console.log("viagem")
       this.form.patchValue({
         hospedagem: parseFloat(this.verificaCampoVazio('hospedagem')).toFixed(2),
         alimentacao: parseFloat(this.verificaCampoVazio('alimentacao')).toFixed(2),
