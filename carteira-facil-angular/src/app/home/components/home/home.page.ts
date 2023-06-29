@@ -3,14 +3,13 @@ import { AlertController } from '@ionic/angular';
 import { GastoReceita } from '../../../gastos-receitas/model/gasto-receita';
 import { GastoReceitaService } from '../../../gastos-receitas/services/gasto-receita.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoginPage } from 'src/app/login/login.page';
 
 @Component({
   selector: 'app-principal',
-  templateUrl: './principal.page.html',
-  styleUrls: ['./principal.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class PrincipalPage implements OnInit {
+export class HomePage implements OnInit {
 
   saldoAtual: number = 0;
   saldoAtualFormatado: string;

@@ -26,6 +26,10 @@ export class ListaDesejoPage implements OnInit {
     this.atualizarListaDesejos();
   }
 
+  navegar(pagina: string){
+    this.router.navigate([pagina]);
+  }
+
   adicionar() {
     this.router.navigate(['adicionar'], { relativeTo: this.route });
   }

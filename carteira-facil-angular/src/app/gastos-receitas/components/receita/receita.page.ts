@@ -27,6 +27,10 @@ export class ReceitaPage implements OnInit {
     this.atualizarReceita();
   }
 
+  navegar(pagina: string){
+    this.router.navigate([pagina]);
+  }
+
   adicionar(){
     this.router.navigate(['adicionar'], { relativeTo: this.route});
   }

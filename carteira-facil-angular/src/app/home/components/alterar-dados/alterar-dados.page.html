@@ -1,0 +1,63 @@
+<ion-content>
+  <ion-header collapse="fade">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="cancelar()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title id="titulo">Alterar dados</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+
+    <ion-list>
+      <form [formGroup]="form">
+        <ion-grid>
+          <ion-item>
+            <ion-col size="4">
+              <ion-label class="legenda">Nome</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-input formControlName="nome"></ion-input>
+            </ion-col>
+          </ion-item>
+          <ion-item>
+            <ion-col size="4">
+              <ion-label class="legenda">Email</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-input formControlName="email"></ion-input>
+            </ion-col>
+          </ion-item>
+          <ion-item>
+            <ion-col size="4">
+              <ion-label class="legenda">Telefone</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-input formControlName="telefone"></ion-input>
+            </ion-col>
+          </ion-item>
+          <ion-item>
+            <ion-col size="4">
+              <ion-label class="legenda">Senha atual</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-input formControlName="senha"></ion-input>
+            </ion-col>
+          </ion-item>
+          <ion-item>
+            <ion-col size="4">
+              <ion-label class="legenda">Nova senha</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-input formControlName="novaSenha"></ion-input>
+            </ion-col>
+          </ion-item>
+        </ion-grid>
+      </form>
+    </ion-list>
+    <ion-button id="botao-confirmar" size="full" shape="round" (click)="atualizar()" [disabled]="!form.valid">CONFIRMAR</ion-button>
+  </div>
+</ion-content>

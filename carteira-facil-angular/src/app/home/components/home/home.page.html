@@ -5,7 +5,7 @@
       <a (click)="navegar('receita')" class="menu-itens">Receita</a>
       <a (click)="navegar('lista-desejos')" class="menu-itens">Lista de Desejos</a>
       <div class="menu-itens-inferior">
-        <a href="alterar-dados" class="menu-itens">Alterar Dados</a>
+        <a (click)="navegar('home/alterar-dados')" class="menu-itens">Alterar Dados</a>
         <a href="" class="menu-itens">Sair</a>
       </div>
     </ion-content>
@@ -21,7 +21,7 @@
     </ion-header>
   </div>
 
-  <ion-card id="extrato" (click)="navegar('extrato')">
+  <ion-card id="extrato" (click)="navegar('home/extrato')">
     <ion-card-header>
       <ion-card-subtitle class="titulo-card">Saldo atual</ion-card-subtitle>
       <ion-card-title class="titulo-card"> {{ saldoAtualFormatado }} </ion-card-title>
@@ -74,5 +74,4 @@
     </ion-grid>
     <h5 class="legendaMensagem">{{ mensagem }}</h5>
   </ion-card>
-  <p>{{novaVar}}</p>
 </ion-content>

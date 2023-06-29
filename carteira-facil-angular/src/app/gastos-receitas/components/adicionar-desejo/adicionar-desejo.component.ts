@@ -93,17 +93,6 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
 
         this.setTipoDesejo(resposta.tipo);
 
-        // let total = resposta.hospedagem + 
-        //             resposta.alimentacao + 
-        //             resposta.passagem + 
-        //             resposta.transporte + 
-        //             resposta.compras + 
-        //             resposta.lazer + 
-        //             resposta.gastosExtras + 
-        //             resposta.burocracia;
-
-        // this.totalViagemFormatado = total.toString();
-
         this.calcularTotalViagem(resposta.hospedagem.toFixed(2), 'hospedagem')
         this.calcularTotalViagem(resposta.alimentacao.toFixed(2), 'alimentacao')
         this.calcularTotalViagem(resposta.passagem.toFixed(2), 'passagem')

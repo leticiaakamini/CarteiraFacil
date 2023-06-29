@@ -18,4 +18,12 @@ export class CadastroService {
   listar(){
     return this.httpClient.get<Cadastro[]>(this.API);
   }
+
+  buscarPorId(){
+    return this.httpClient.get<Cadastro>(`${this.API}/alterar-dados`);
+  }
+
+  atualizar(cadastro: Cadastro){
+    return this.httpClient.put<Cadastro>(this.API, cadastro);
+  }
 }

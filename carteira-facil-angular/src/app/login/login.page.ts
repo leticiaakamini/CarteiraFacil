@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
 
   fazerLogin() {
     this.service.fazerLogin(this.usuario).subscribe(
-      () => this.router.navigate(['/principal']),
+      () => this.router.navigate(['/home']),
       () => this.mostrarAlertaErro()
     )
   }

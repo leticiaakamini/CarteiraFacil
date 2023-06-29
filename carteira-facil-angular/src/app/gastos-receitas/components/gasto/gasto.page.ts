@@ -31,6 +31,10 @@ export class GastoPage implements OnInit {
     this.atualizarGastoEventual();    
   }
 
+  navegar(pagina: string){
+    this.router.navigate([pagina]);
+  }
+
   adicionar() {
     this.router.navigate(['adicionar'], { relativeTo: this.route });
   }
