@@ -6,18 +6,16 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leticia.carteirafacilspring.model.Cadastro;
-import com.leticia.carteirafacilspring.model.GastoReceita;
 import com.leticia.carteirafacilspring.model.Usuario;
 import com.leticia.carteirafacilspring.repository.UsuarioRepository;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -39,10 +37,10 @@ public class UsuarioController {
         return usuarioRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Cadastro> encontrarPorId(@PathVariable Long id){
-        return usuarioRepository.findById(id)
-            .map(usuario -> ResponseEntity.ok().body(usuario))
+    @GetMapping("/alterar-dados")
+    public ResponseEntity<Cadastro> buscarPorId(){
+        return usuarioRepository.findById(buscarIdUsuario())
+            .map(usuarioEncontrado -> ResponseEntity.ok().body(usuarioEncontrado))
             .orElse(ResponseEntity.notFound().build());
     }
 
@@ -79,19 +77,20 @@ public class UsuarioController {
         return usuarioLogado.getId();
     }
 
-    
-    // @PostMapping
-    // public Boolean fazerLogin(@RequestBody Usuario usuario){
-    //     Cadastro usuarioAutenticado = usuarioRepository.usuarioAutenticado(usuario.getEmail(), usuario.getSenha());
+    @PutMapping
+    public ResponseEntity<Cadastro> alterarDados(@RequestBody Cadastro cadastro){
 
-    //     if (Objects.isNull(usuarioAutenticado)) {
-    //         return false;
-    //     } else {
-    //         usuario.setId(usuarioAutenticado.getId());
-    //         setIdUsuario(usuario.getId());
-    //         GastoReceita[] gastoReceita;
+        return usuarioRepository.findById(this.buscarIdUsuario())
+            .map(cadastroEncontrado -> {
+                cadastroEncontrado.setNome(cadastro.getNome());
+                cadastroEncontrado.setEmail(cadastro.getEmail());
+                cadastroEncontrado.setTelefone(cadastro.getTelefone());
+                cadastroEncontrado.setSenha(cadastro.getSenha());
 
-    //         return true;
-    //     }  
-    // }
+                Cadastro atualizado = usuarioRepository.save(cadastroEncontrado);
+                return ResponseEntity.ok().body(atualizado);
+            })
+            .orElse(ResponseEntity.notFound().build());
+        
+    }
 }
