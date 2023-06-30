@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Desejo } from '../../model/desejo';
 import { DesejoService } from '../../services/desejo.service';
 import { AlertController, ToastController } from '@ionic/angular';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lista-desejo',
@@ -13,6 +14,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 export class ListaDesejoPage implements OnInit {
 
   desejos$: Observable<Desejo[]> | null = null;
+  quantiaFaltante
 
   constructor(
     private router: Router,
@@ -43,6 +45,14 @@ export class ListaDesejoPage implements OnInit {
     if (this.route.params && this.route.params['id']) {
       return this.service.buscarPorId(this.route.params['id']);
     }
+  }
+
+  calcularPorcentagem(valor, quantiaEconomizada){
+    return ((quantiaEconomizada/valor) * 100).toFixed(1)
+  }
+
+  concluirDesejo(nome){
+    
   }
 
   async excluir(desejo: Desejo) {
@@ -78,5 +88,4 @@ export class ListaDesejoPage implements OnInit {
 
     await toast.present();
   }
-
 }

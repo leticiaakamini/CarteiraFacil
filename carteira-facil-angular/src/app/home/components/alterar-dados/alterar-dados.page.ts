@@ -14,7 +14,8 @@ import { ValidacoesForm } from 'src/app/shared/validacoes-form';
 export class AlterarDadosPage implements OnInit {
 
   form: FormGroup;
-  senhaAtualCorreta: boolean = false;
+  alterarSenha: boolean = false;
+  formSetado: boolean = false;
 
   constructor(
     private service: CadastroService,
@@ -41,35 +42,49 @@ export class AlterarDadosPage implements OnInit {
         telefone: resposta.telefone
       });
     },
-    erro => console.log(erro))
+      erro => console.log(erro))
   }
 
-  atualizar(){
+  verificarAlterarSenha(event) {
+    this.alterarSenha = event.detail.checked
+  }
+
+  atualizar() {
     this.service.buscarPorId().subscribe(resposta => {
-      if (this.form.get('senha').value == resposta.senha) {
-        this.senhaAtualCorreta = true;
+      if (this.alterarSenha) {
+        if (this.form.get('senha').value != '' && this.form.get('novaSenha').value != '') {
+          if (this.form.get('senha').value == resposta.senha) {
+            this.form.patchValue({
+              senha: this.form.get('novaSenha').value
+            });
+            this.formSetado = true;
+          } else {
+            this.mensagemSenhaIncorreta();
+          }
+        } else {
+          this.mensagemAvisoSenha();
+        }
+      } else {
+        this.form.patchValue({
+          senha: resposta.senha
+        });
+        this.formSetado = true;
+      }
+
+      if (this.formSetado) {
+        this.service.atualizar(this.form.value).subscribe(
+          () => this.mensagemSucesso(),
+          () => this.mensagemErro()
+        )
       }
     })
-    
-    if (this.senhaAtualCorreta) {
-      this.form.patchValue({
-        senha: this.form.get('novaSenha').value
-      });
-
-      this.service.atualizar(this.form.value).subscribe(
-        () => this.mensagemSucesso(),
-        () => this.mensagemErro()
-      )
-    } else {
-      console.log("Senha atual incorreta")
-    }
   }
 
-  cancelar(){
+  cancelar() {
     this.location.back();
   }
 
-  async mensagemSucesso(){
+  async mensagemSucesso() {
     const toast = await this.toastController.create({
       message: 'Salvo com sucesso!',
       duration: 5000,
@@ -79,9 +94,27 @@ export class AlterarDadosPage implements OnInit {
     this.cancelar();
   }
 
-  async mensagemErro(){
+  async mensagemErro() {
     const toast = await this.toastController.create({
       message: 'Erro ao salvar!',
+      duration: 5000,
+    });
+
+    await toast.present();
+  }
+
+  async mensagemAvisoSenha() {
+    const toast = await this.toastController.create({
+      message: 'É necessário preencher a senha atual e a nova senha!',
+      duration: 5000,
+    });
+
+    await toast.present();
+  }
+
+  async mensagemSenhaIncorreta() {
+    const toast = await this.toastController.create({
+      message: 'Senha atual incorreta!',
       duration: 5000,
     });
 

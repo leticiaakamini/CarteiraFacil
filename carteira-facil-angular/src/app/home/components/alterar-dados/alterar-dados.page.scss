@@ -73,3 +73,12 @@ ion-input {
     color: #000;
     transition: all 300ms ease-in-out;
 }
+
+.checkbox-senha{
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+ion-checkbox{
+    --size: 20px;
+}

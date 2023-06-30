@@ -1,8 +1,9 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { GastoReceita } from '../../../gastos-receitas/model/gasto-receita';
 import { GastoReceitaService } from '../../../gastos-receitas/services/gasto-receita.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-principal',
@@ -10,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  @ViewChild("grafico", {static: true}) elemento: ElementRef;
 
   saldoAtual: number = 0;
   saldoAtualFormatado: string;
@@ -26,6 +28,16 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    new Chart(this.elemento.nativeElement, {
+      type: 'doughnut',
+      data: {
+        datasets: [
+          {
+            data: [10,20,30]
+          }
+        ]
+      }
+    });
     this.service.listar().subscribe((gastosReceitas) => this.calcularSaldo(gastosReceitas));
   }
 

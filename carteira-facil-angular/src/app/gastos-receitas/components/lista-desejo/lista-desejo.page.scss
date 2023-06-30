@@ -42,12 +42,21 @@ ion-toolbar{
 ion-card{
     margin-top: 15px;
     border-radius: 10px;
-    height: 180px;
+    height: 240px;
     padding: 10px 0px;
 }
 
 .card-viagem{
-    height: 375px;
+    height: 440px;
+}
+
+.botao-concluir{
+    width: 100px;
+    height: 40px;
+    float: right;
+    margin-right: 20px;
+    color: #004b4d;
+    --border-color: #004b4d;
 }
 
 ion-card-title{
@@ -72,7 +81,7 @@ ion-card-subtitle{
 
 ion-card-content{
     color: #000;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     font-size: 18px;
 }
 
