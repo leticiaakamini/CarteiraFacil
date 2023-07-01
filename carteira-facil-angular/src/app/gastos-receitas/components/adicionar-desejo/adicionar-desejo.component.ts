@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { FormBaseDirective } from 'src/app/shared/form-base/form-base.directive';
 import { ValidacoesForm } from 'src/app/shared/validacoes-form';
 import { DesejoService } from '../../services/desejo.service';
@@ -34,7 +34,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
   ]
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: DesejoService,
     private toastController: ToastController,
     private location: Location,

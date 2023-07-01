@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CadastroService } from './services/cadastro.service';
 import { ValidacoesForm } from '../shared/validacoes-form';
 import { FormBaseDirective } from '../shared/form-base/form-base.directive';
@@ -16,7 +16,7 @@ export class CadastroPage extends FormBaseDirective implements OnInit {
   //form: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: CadastroService,
     private toastController: ToastController,
     private location: Location

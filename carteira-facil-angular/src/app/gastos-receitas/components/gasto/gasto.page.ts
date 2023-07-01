@@ -91,7 +91,7 @@ export class GastoPage implements OnInit {
   atualizarGastoEssencial(){
     this.gastosEssenciais$ = this.service.listar().pipe(
       map(
-        (gasto: GastoReceita[]) => gasto.filter(gastoEssencial => gastoEssencial.tipoGasto == 'essencial')
+        (gasto: GastoReceita[]) => gasto.filter(gastoEssencial => gastoEssencial.tipoGasto == 'Essencial')
       )
     );
   }
@@ -99,7 +99,7 @@ export class GastoPage implements OnInit {
   atualizarGastoEventual(){
     this.gastosEventuais$ = this.service.listar().pipe(
       map(
-        (gasto: GastoReceita[]) => gasto.filter(gastoEventual => (gastoEventual.tipoGasto != 'essencial') && (gastoEventual.tipoGasto != null))
+        (gasto: GastoReceita[]) => gasto.filter(gastoEventual => (gastoEventual.tipoGasto != 'Essencial') && (gastoEventual.tipoGasto != null))
       )
     );
   }

@@ -1,4 +1,4 @@
-import { FormControl, FormGroup } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 
 export class ValidacoesForm {
 
@@ -16,16 +16,16 @@ export class ValidacoesForm {
   }
 
   static igualA(outroCampo: string) {
-    const validator = (formControl: FormControl) => {
+    const validator = (formControl: UntypedFormControl) => {
       if (outroCampo == null) {
         throw new Error('É necessário informar um campo.')
       }
 
-      if (!formControl.root || !(<FormGroup>formControl.root).controls) {
+      if (!formControl.root || !(<UntypedFormGroup>formControl.root).controls) {
         return null;
       }
 
-      const campo = (<FormGroup>formControl.root).get(outroCampo);
+      const campo = (<UntypedFormGroup>formControl.root).get(outroCampo);
 
       if (!campo) {
         throw new Error('É necessário informar um campo válido.');
@@ -41,7 +41,7 @@ export class ValidacoesForm {
     return validator;
   }
 
-  static telefoneValidator(telefone: FormControl){
+  static telefoneValidator(telefone: UntypedFormControl){
     const tel = telefone.value;
 
     if(tel && tel !== ''){
@@ -52,7 +52,7 @@ export class ValidacoesForm {
     return null;
   }
 
-  static valorValidator(valor: FormControl){
+  static valorValidator(valor: UntypedFormControl){
     const preco = valor.value;
 
     if(preco && preco !== ''){

@@ -1,12 +1,12 @@
 import { Directive, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Directive({
   selector: '[appFormBase]'
 })
 export abstract class FormBaseDirective implements OnInit{
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor() { }
 

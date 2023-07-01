@@ -40,20 +40,23 @@
         <ion-item *ngIf="movimentacao == 'Gasto'">
           <ion-label class="legenda">Tipo</ion-label>
           <ion-select formControlName="tipoGasto" cancelText="Cancelar" placeholder="Selecionar">
-            <ion-select-option value="essencial">Gasto Essencial</ion-select-option>
-            <ion-select-option value="alimentação">Alimentação</ion-select-option>
-            <ion-select-option value="calçado">Calçado</ion-select-option>
-            <ion-select-option value="construção">Construção</ion-select-option>
-            <ion-select-option value="decoração">Decoração</ion-select-option>
-            <ion-select-option value="eletrodomésticos">Eletrodomésticos</ion-select-option>
-            <ion-select-option value="eletrônicos">Eletrônicos</ion-select-option>
-            <ion-select-option value="lazer">Lazer</ion-select-option>
-            <ion-select-option value="maquiagem">Maquiagem</ion-select-option>
-            <ion-select-option value="restaurante">Restaurante</ion-select-option>
-            <ion-select-option value="roupas">Roupas</ion-select-option>
-            <ion-select-option value="transporte">Transporte</ion-select-option>
-            <ion-select-option value="viagem">Viagem</ion-select-option>
-            <ion-select-option value="outro">Outro</ion-select-option>
+            <ion-select-option value="Essencial">Gasto Essencial</ion-select-option>
+            <ion-select-option value="Alimentação">Alimentação</ion-select-option>
+            <ion-select-option value="Calçado">Calçado</ion-select-option>
+            <ion-select-option value="Combustivel">Combustível</ion-select-option>
+            <ion-select-option value="Construção">Construção</ion-select-option>
+            <ion-select-option value="Cursos">Cursos</ion-select-option>
+            <ion-select-option value="Decoração">Decoração</ion-select-option>
+            <ion-select-option value="Eletrodomésticos">Eletrodomésticos</ion-select-option>
+            <ion-select-option value="Eletrônicos">Eletrônicos</ion-select-option>
+            <ion-select-option value="Estética">Estética</ion-select-option>
+            <ion-select-option value="Lazer">Lazer</ion-select-option>
+            <ion-select-option value="Maquiagem">Maquiagem</ion-select-option>
+            <ion-select-option value="Restaurante">Restaurante</ion-select-option>
+            <ion-select-option value="Roupas">Roupas</ion-select-option>
+            <ion-select-option value="Transporte">Transporte</ion-select-option>
+            <ion-select-option value="Viagem">Viagem</ion-select-option>
+            <ion-select-option value="Outro">Outro</ion-select-option>
           </ion-select>
           <app-controle-erro
             [mostrarErro]="verificaValidTouched('tipoGasto')"

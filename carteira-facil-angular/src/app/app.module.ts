@@ -16,30 +16,29 @@ import localePt from '@angular/common/locales/pt';
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  entryComponents: [],
-  imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule,
-    HttpClientModule,
-    GastosReceitasModule
-  ],
-  providers: [{ 
-    provide: RouteReuseStrategy, 
-    useClass: IonicRouteStrategy
-  },
-  { 
-    provide: LOCALE_ID, 
-    useValue: 'pt-BR' 
-  },
-    AuthService,
-    AuthGuardService
-  ],
-  bootstrap: [
-    AppComponent
-  ],
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        HttpClientModule,
+        GastosReceitasModule
+    ],
+    providers: [{
+            provide: RouteReuseStrategy,
+            useClass: IonicRouteStrategy
+        },
+        {
+            provide: LOCALE_ID,
+            useValue: 'pt-BR'
+        },
+        AuthService,
+        AuthGuardService
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule {}

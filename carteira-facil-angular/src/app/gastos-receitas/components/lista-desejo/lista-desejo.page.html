@@ -42,7 +42,9 @@
           <p>Economizar/mês: R$ {{desejo.economizar}}</p>
           <p>Total de quantia economizada: R$ {{desejo.quantiaEconomizada}}</p>
           <p>Prazo: {{ desejo.prazo }}</p>
-          <p> {{ calcularPorcentagem(desejo.valor, desejo.quantiaEconomizada) }} % </p>
+          <div class="progresso">
+            <p>Progresso:  {{ calcularPorcentagem(desejo.valor, desejo.quantiaEconomizada) }} % </p>
+          </div>
         </ion-card-content>
         <ion-button fill="outline" shape="round" class="botao-concluir">
           Concluído
@@ -84,7 +86,9 @@
             <p>Economizar/mês: R$ {{desejo.economizar}}</p>
             <p>Total de quantia economizada: R$ {{desejo.quantiaEconomizada}}</p>
             <p>Prazo: {{ desejo.prazo }}</p>
-            <p> {{ calcularPorcentagem(desejo.valor, desejo.quantiaEconomizada) }} % </p>
+            <div class="progresso">
+              <p>Progresso:  {{ calcularPorcentagem(desejo.valor, desejo.quantiaEconomizada) }} % </p>
+            </div>
           </ion-card-content>
           <ion-button (click)="concluirDesejo(desejo.nome)" fill="outline" shape="round" class="botao-concluir">
             Concluído

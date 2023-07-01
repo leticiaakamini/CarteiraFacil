@@ -42,12 +42,12 @@ ion-toolbar{
 ion-card{
     margin-top: 15px;
     border-radius: 10px;
-    height: 240px;
+    height: 250px;
     padding: 10px 0px;
 }
 
 .card-viagem{
-    height: 440px;
+    height: 450px;
 }
 
 .botao-concluir{
@@ -93,5 +93,10 @@ ion-card-content{
 
 .icones{
     height: 20px;
+}
+
+.progresso{
+    padding-top: 10px;
+    width: 50%;
 }
 

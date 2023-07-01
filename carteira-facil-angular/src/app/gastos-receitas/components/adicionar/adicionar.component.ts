@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { format, parseISO } from 'date-fns';
@@ -23,7 +23,7 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
   adicionarOuEditar = '';
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: GastoReceitaService,
     private toastController: ToastController,
     private location: Location,

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { ValidacoesForm } from '../validacoes-form';
 
 @Component({
@@ -9,7 +9,7 @@ import { ValidacoesForm } from '../validacoes-form';
 })
 export class MensagemErroComponent implements OnInit {
 
-  @Input() control: FormControl;
+  @Input() control: UntypedFormControl;
   @Input() label: string;
 
   constructor() { }

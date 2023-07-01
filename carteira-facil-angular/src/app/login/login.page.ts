@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Usuario } from './usuario';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -13,21 +13,23 @@ import { AlertController } from '@ionic/angular';
 export class LoginPage implements OnInit {
 
   private usuario: Usuario = new Usuario();
+  form: UntypedFormGroup;
+  
 
-  form = this.formBuilder.group({
-    id: [null],
-    email: ['', [Validators.required, Validators.email]],
-    senha: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]]
-  });
-
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private service: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private alerta: AlertController,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.form = this.formBuilder.group({
+      id: [null],
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]]
+    });
+  }
 
   fazerLogin() {
     this.service.fazerLogin(this.usuario).subscribe(

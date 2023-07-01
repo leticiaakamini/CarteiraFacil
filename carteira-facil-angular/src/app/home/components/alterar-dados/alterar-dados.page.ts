@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Cadastro } from 'src/app/cadastro/model/cadastro';
 import { CadastroService } from 'src/app/cadastro/services/cadastro.service';
@@ -13,13 +13,13 @@ import { ValidacoesForm } from 'src/app/shared/validacoes-form';
 })
 export class AlterarDadosPage implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   alterarSenha: boolean = false;
   formSetado: boolean = false;
 
   constructor(
     private service: CadastroService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private location: Location,
     private toastController: ToastController
   ) { }

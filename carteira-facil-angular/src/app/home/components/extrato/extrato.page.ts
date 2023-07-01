@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GastoReceitaService } from '../../../gastos-receitas/services/gasto-receita.service';
 import { GastoReceita } from '../../../gastos-receitas/model/gasto-receita';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({

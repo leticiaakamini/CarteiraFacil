@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Desejo } from '../../model/desejo';
 import { DesejoService } from '../../services/desejo.service';
 import { AlertController, ToastController } from '@ionic/angular';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lista-desejo',
@@ -14,7 +13,6 @@ import { map } from 'rxjs/operators';
 export class ListaDesejoPage implements OnInit {
 
   desejos$: Observable<Desejo[]> | null = null;
-  quantiaFaltante
 
   constructor(
     private router: Router,
