@@ -62,6 +62,7 @@ public class DesejoController {
                 desejoEncontrado.setLazer(desejo.getLazer());
                 desejoEncontrado.setGastosExtras(desejo.getGastosExtras());
                 desejoEncontrado.setBurocracia(desejo.getBurocracia());
+                desejoEncontrado.setConcluido(desejo.getConcluido());
                 desejoEncontrado.setPrazo(desejo.getPrazo());
 
                 Desejo atualizado = repository.save(desejoEncontrado);

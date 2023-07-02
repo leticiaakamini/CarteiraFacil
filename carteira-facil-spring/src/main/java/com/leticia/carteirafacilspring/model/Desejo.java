@@ -65,6 +65,9 @@ public class Desejo {
     @Column(name = "burocracia", nullable = true)
     private double burocracia;
 
+    @Column(name = "concluido", nullable = false)
+    private int concluido;
+
     @Column(name = "id_usuario", nullable = false)
     private Long idUsuario;
 }
