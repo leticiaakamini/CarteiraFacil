@@ -71,3 +71,8 @@ ion-button[fill='outline']{
     text-transform: uppercase;
     font-weight: 500;
 }
+
+ion-checkbox{
+    --size: 20px;
+    margin-right: 10px;
+}

@@ -168,6 +168,10 @@
             mensagemErro="Insira um valor válido">
           </app-controle-erro> -->
         </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox formControlName="concluido" (ionChange)="verificarConcluido($event)"></ion-checkbox>
+          <ion-label>Desejo concluído</ion-label>
+        </ion-item>
       </form>
     </ion-list>
 

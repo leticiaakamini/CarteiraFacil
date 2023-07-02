@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Desejo } from '../../model/desejo';
 import { DesejoService } from '../../services/desejo.service';
 import { AlertController, ToastController } from '@ionic/angular';
@@ -13,6 +13,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 export class ListaDesejoPage implements OnInit {
 
   desejos$: Observable<Desejo[]> | null = null;
+  desejoConcluido: boolean = false;
 
   constructor(
     private router: Router,
@@ -47,10 +48,6 @@ export class ListaDesejoPage implements OnInit {
 
   calcularPorcentagem(valor, quantiaEconomizada){
     return ((quantiaEconomizada/valor) * 100).toFixed(1)
-  }
-
-  concluirDesejo(nome){
-    
   }
 
   async excluir(desejo: Desejo) {

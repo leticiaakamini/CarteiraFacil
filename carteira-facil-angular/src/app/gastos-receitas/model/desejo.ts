@@ -14,5 +14,6 @@ export interface Desejo {
     lazer: number;
     gastosExtras: number;
     burocracia: number;
+    concluido: number;
     idUsuario: number;
 }

@@ -21,6 +21,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
   totalViagem: number = 0;
   totalViagemFormatado: string;
   prazoMesAno: string = '';
+  desejoConcluido: number = 0;
   camposViagem: string[][] = [
     ['passagem', ''],
     ['hospedagem', ''],
@@ -67,6 +68,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
       gastosExtras: ['', ValidacoesForm.valorValidator],
       burocracia: ['', ValidacoesForm.valorValidator],
       prazo: [''],
+      concluido: [0],
       idUsuario: [null]
     });
 
@@ -88,6 +90,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
           gastosExtras: resposta.gastosExtras.toFixed(2),
           burocracia: resposta.burocracia.toFixed(2),
           prazo: resposta.prazo,
+          concluido: resposta.concluido,
           idUsuario: resposta.idUsuario
         });
 
@@ -125,7 +128,8 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
       economizar: parseFloat(this.form.controls['economizar'].value.replace(",", ".")).toFixed(2),
       quantiaEconomizada: parseFloat(this.verificaCampoVazio('quantiaEconomizada')).toFixed(2),
       valor: parseFloat(this.form.controls['valor'].value.replace(",", ".")).toFixed(2),
-      prazo: this.form.controls['prazo'].value.replace(this.form.controls['prazo'].value, this.prazoMesAno)
+      prazo: this.form.controls['prazo'].value.replace(this.form.controls['prazo'].value, this.prazoMesAno),
+      concluido: this.desejoConcluido
     })
 
     if (this.desejoViagem) {
@@ -212,6 +216,14 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
       prazoMes = prazoMes - 12;
     }
     this.prazoMesAno = (prazoMes) + '/' + (dataAtual.getFullYear() + auxAno);
+  }
+
+  verificarConcluido(event) {
+    if (event.detail.checked) {
+      this.desejoConcluido = 1;
+    } else {
+      this.desejoConcluido = 0;
+    }
   }
 
   tipoAdicionarEditar() {

@@ -23,7 +23,9 @@
             <ion-grid>
               <ion-row class="nome-gasto">
                 <ion-col size="8">
-                  {{desejo.nome}}
+                  <div [ngStyle]="{'text-decoration': desejo.concluido==1 ? 'line-through' : 'none'}">
+                    {{desejo.nome}}
+                  </div>
                 </ion-col>
                 <ion-col size="4">
                   <ion-button (click)="editar(desejo)" fill="clear" class="botao-editar-excluir">
@@ -46,9 +48,6 @@
             <p>Progresso:  {{ calcularPorcentagem(desejo.valor, desejo.quantiaEconomizada) }} % </p>
           </div>
         </ion-card-content>
-        <ion-button fill="outline" shape="round" class="botao-concluir">
-          Concluído
-        </ion-button>
       </ion-card>
 
       <ng-template #viagem>
@@ -58,7 +57,9 @@
               <ion-grid>
                 <ion-row class="nome-gasto">
                   <ion-col size="8">
-                    {{desejo.nome}}
+                    <div [ngStyle]="{'text-decoration': desejo.concluido==1 ? 'line-through' : 'none'}">
+                      {{desejo.nome}}
+                    </div>
                   </ion-col>
                   <ion-col size="4">
                     <ion-button (click)="editar(desejo)" fill="clear" class="botao-editar-excluir">
@@ -90,9 +91,6 @@
               <p>Progresso:  {{ calcularPorcentagem(desejo.valor, desejo.quantiaEconomizada) }} % </p>
             </div>
           </ion-card-content>
-          <ion-button (click)="concluirDesejo(desejo.nome)" fill="outline" shape="round" class="botao-concluir">
-            Concluído
-          </ion-button>
         </ion-card>
       </ng-template>
     </div>
