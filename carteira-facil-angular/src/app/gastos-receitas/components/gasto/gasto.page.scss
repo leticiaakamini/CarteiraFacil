@@ -33,6 +33,7 @@ ion-toolbar{
     color: #fff;
     text-transform: uppercase;
     font-weight: 500;
+    text-align: center;  
 }
 
 #container{
@@ -75,9 +76,11 @@ ion-card-content{
     height: 25px;
     width: 50px;
     color: #004b4d;
+    padding: 0;
 }
 
 .icones{
     height: 20px;
+    float: right;
 }
 

@@ -5,7 +5,7 @@ import { ValidacoesForm } from 'src/app/shared/validacoes-form';
 import { DesejoService } from '../../services/desejo.service';
 import { ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-adicionar-desejo',
@@ -40,7 +40,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     private toastController: ToastController,
     private location: Location,
     private route: ActivatedRoute,
-    private cdRef: ChangeDetectorRef  
+    private cdRef: ChangeDetectorRef
   ) {
     super();
   }

@@ -25,6 +25,8 @@ ion-icon{
     color: #fff;
     text-transform: uppercase;
     font-weight: 500;
+    text-align: center; 
+    margin-right: 20px;
 }
 
 #container {
@@ -34,14 +36,11 @@ ion-icon{
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    padding-right: 10px;
-    padding-left: 10px;
 }
 
 ion-list {
     --ion-item-background: transparent;
-    margin-bottom: 30px;
-    margin-right: 20px;
+    margin: 0 20px 30px 20px;
 }
 
 ion-list ion-item{
@@ -52,7 +51,6 @@ ion-list ion-item{
 .legenda {
     color: #fff;
     font-weight: 300;
-    padding-left: 15px;
 }
 
 ion-input {
@@ -74,11 +72,7 @@ ion-input {
     transition: all 300ms ease-in-out;
 }
 
-.checkbox-senha{
-    padding-top: 10px;
-    padding-bottom: 15px;
-}
-
 ion-checkbox{
-    --size: 20px;
+    margin-right: 10px;
+    --size: 15px;
 }

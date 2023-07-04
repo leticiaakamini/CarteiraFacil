@@ -1,3 +1,7 @@
+*{
+  font-family: 'Bitter', serif;
+}
+
 ion-content{
   --background: linear-gradient(to top, #33cccc 0%, #006666 100%); 
 }
@@ -15,14 +19,13 @@ ion-content{
 
 h1{ 
   color: #fff;
-  font-family: 'Bitter', serif;
-  margin-bottom: 70px;
+  margin-top: 0;
+  margin-bottom: 60px;
 }
 
 ion-list{
   --ion-item-background: transparent;
-  margin-bottom: 30px;
-  margin-right: 20px;
+  margin: 0 20px;
 }
 
 ion-list ion-item{
@@ -32,8 +35,6 @@ ion-list ion-item{
 
 .legenda{
   color: #fff;
-  padding-left: 15px;
-  font-family: 'Bitter', serif;
   font-weight: 300;
 }
 
@@ -41,6 +42,9 @@ ion-list ion-item{
   color:#fff;
   --background: #004b4d;
   font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 #botao-entrar:hover{
@@ -51,14 +55,10 @@ ion-list ion-item{
 ion-button[fill='outline']{
   --border-color: #004b4d;
   color: #004b4d;
+  text-transform: uppercase;
 }
 
 ion-button[fill='outline']:hover{
   color: #fff;
   transition: all 300ms ease-in-out;
-}
-
-.label-botao{
-  text-transform: uppercase;
-  font-family: 'Bitter', serif;
 }

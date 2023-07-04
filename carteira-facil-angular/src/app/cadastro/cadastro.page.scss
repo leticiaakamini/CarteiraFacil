@@ -2,6 +2,7 @@
     margin: 0;
     border: 0;
     padding: 0;
+    font-family: 'Bitter', serif;
 }
 
 ion-content{
@@ -34,32 +35,19 @@ ion-icon{
     margin: 10px;
 }
 
-div{
-    padding-top: 10%;
-}
-
 h1{
     color: #fff;
-    font-family: 'Bitter', serif;
     margin-bottom: 70px;
 }
 
 ion-list {
     --ion-item-background: transparent;
-    margin-bottom: 30px;
-    margin-right: 20px;
+    margin: 0 20px;
 }
 
 ion-list ion-item{
     margin-bottom: 15px;
     --border-color: #004b4d;
-}
-
-.legenda{
-    color: #fff;
-    font-family: 'Bitter', serif;
-    font-weight: 300;
-    padding-left: 15px;
 }
 
 ion-button[size='full']:hover {
@@ -69,8 +57,6 @@ ion-button[size='full']:hover {
 
 ion-input{
     font-size: 15px;
-    font-family: 'Bitter', serif;
-    margin-left: 15px;
 }
 
 #botao-cadastro{
@@ -78,7 +64,6 @@ ion-input{
     padding-left: 20px; 
     padding-right: 20px;
     text-transform: uppercase;
-    font-family: 'Bitter', serif;
     font-weight: 300;
     color:#fff;
     --background: #004b4d;

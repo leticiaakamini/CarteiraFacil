@@ -34,14 +34,14 @@
           </app-controle-erro>
         </ion-item>
         <ion-item>
-          <ion-input id="senha" formControlName="senha" placeholder="Nova senha"></ion-input>
+          <ion-input id="senha" type="password" formControlName="senha" placeholder="Nova senha"></ion-input>
           <app-mensagem-erro [control]="form.get('senha')" label="Senha"></app-mensagem-erro>
           <app-controle-erro [mostrarErro]="verificaSenha('senha')"
             mensagemErro="Senha inválida!">
           </app-controle-erro>
         </ion-item>
         <ion-item>
-          <ion-input id="confirmarSenha" formControlName="confirmarSenha" placeholder="Confirmar senha"></ion-input>
+          <ion-input id="confirmarSenha" type="password" formControlName="confirmarSenha" placeholder="Confirmar senha"></ion-input>
           <app-controle-erro [mostrarErro]="form.get('confirmarSenha').hasError('igualA')"
             mensagemErro="Senhas não são iguais.">
           </app-controle-erro>

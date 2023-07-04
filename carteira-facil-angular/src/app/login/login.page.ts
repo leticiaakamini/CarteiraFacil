@@ -19,7 +19,6 @@ export class LoginPage implements OnInit {
   constructor(private formBuilder: UntypedFormBuilder,
     private service: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
     private alerta: AlertController,
   ) { }
 
@@ -33,9 +32,13 @@ export class LoginPage implements OnInit {
 
   fazerLogin() {
     this.service.fazerLogin(this.usuario).subscribe(
-      () => this.router.navigate(['/home']),
+      () => this.navegar('/home'),
       () => this.mostrarAlertaErro()
     )
+  }
+
+  navegar(pagina: string) {
+    this.router.navigate([pagina]);
   }
 
   async mostrarAlertaErro() {
@@ -45,23 +48,4 @@ export class LoginPage implements OnInit {
     })
     await alert.present();
   }
-
-  // async mostrarAlertaSenha(){
-  //   const alert = await this.alerta.create({
-  //     header: 'Senha incorreta',
-  //     message: 'A senha inserida está incorreta!',
-  //     buttons: ['OK']
-  //   })
-  //   await alert.present(); 
-  // }
-
-  // async mostrarAlertaEmail(){
-  //   const alert = await this.alerta.create({
-  //     header: 'Conta não encontrada',
-  //     message: 'Verifique se o email foi digitado corretamente. Se você não possui uma conta, é necessário se cadastrar.',
-  //     buttons: ['OK']
-  //   })
-
-  //   await alert.present(); 
-  // }
 }

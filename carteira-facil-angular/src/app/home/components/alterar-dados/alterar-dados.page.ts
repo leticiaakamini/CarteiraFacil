@@ -41,12 +41,14 @@ export class AlterarDadosPage implements OnInit {
         email: resposta.email,
         telefone: resposta.telefone
       });
-    },
-      erro => console.log(erro))
+    })
+
+    this.form.get('senha').disable();
+    this.form.get('novaSenha').disable();
   }
 
   verificarAlterarSenha(event) {
-    this.alterarSenha = event.detail.checked
+    this.alterarSenha = event;
   }
 
   atualizar() {

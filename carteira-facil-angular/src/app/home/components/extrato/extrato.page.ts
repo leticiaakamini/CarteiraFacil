@@ -32,10 +32,6 @@ export class ExtratoPage implements OnInit {
     );
   }
 
-  // formatarData(gastoReceita: GastoReceita[]){
-  //   return gastoReceita.map((ab) => ab.data.substring(0,5))
-  // }
-
   ordenarDatas(gastosReceitas: GastoReceita[]){
     return gastosReceitas.sort((a,b) => new Date(this.retornarDate(a.data)).getTime() - new Date(this.retornarDate(b.data)).getTime());
   }

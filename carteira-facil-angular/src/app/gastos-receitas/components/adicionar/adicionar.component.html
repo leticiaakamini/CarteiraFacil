@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-header collapse="fade">
+  <ion-header collapse="fade" class="ion-no-border">
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-button (click)="cancelar()">
@@ -12,7 +12,7 @@
 
   <div id="container">
     <ion-list id="lista-gasto">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form">
         <ion-item>
           <ion-label class="legenda">Nome</ion-label>
           <ion-input formControlName="nome"></ion-input>

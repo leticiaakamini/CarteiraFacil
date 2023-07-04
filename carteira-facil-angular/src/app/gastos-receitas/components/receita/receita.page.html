@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-header collapse="fade">
+  <ion-header collapse="fade" class="ion-no-border">
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-button (click)="navegar('home')">
@@ -21,17 +21,17 @@
           <ion-card-title> 
             <ion-grid>
               <ion-row class="nome-gasto">
-                <ion-col size="8">
+                <ion-col>
                   {{ receita.nome }}
                 </ion-col>
-                <ion-col size="4">
+                <div>
                   <ion-button (click)="editar(receita)" fill="clear" class="botao-editar-excluir">
                     <ion-icon class="icones" name="pencil-outline"></ion-icon>
                   </ion-button>
                   <ion-button (click)="excluir(receita)" fill="clear" class="botao-editar-excluir">
                     <ion-icon class="icones" name="trash-outline"></ion-icon>
                   </ion-button>
-                </ion-col>
+                </div>
               </ion-row>
             </ion-grid>
           </ion-card-title>

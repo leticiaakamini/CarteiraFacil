@@ -73,9 +73,6 @@ export class GastoPage implements OnInit {
         
         this.excluidoSucesso();
       });
-      console.log("excluido")
-    } else{
-      console.log("cancelado")
     }
   }
 

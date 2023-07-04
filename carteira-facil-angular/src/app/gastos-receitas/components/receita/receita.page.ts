@@ -64,9 +64,6 @@ export class ReceitaPage implements OnInit {
         this.atualizarReceita();
         this.excluidoSucesso();
       });
-      console.log("excluido")
-    } else{
-      console.log("cancelado")
     }
   }
 

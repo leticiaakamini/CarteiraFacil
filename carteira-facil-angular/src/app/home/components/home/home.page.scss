@@ -31,7 +31,6 @@ ion-header{
 
 ion-toolbar{
     --background: none;
-    text-align: center;    
 }
 
 ion-menu-button{
@@ -42,6 +41,8 @@ ion-title{
     font-size: 20px;
     color: #fff;
     text-transform: uppercase;
+    text-align: center;  
+    margin-right: 30px;
 }
 
 ion-card{

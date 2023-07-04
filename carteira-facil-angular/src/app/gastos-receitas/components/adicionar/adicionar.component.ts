@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { GastoReceitaService } from '../../services/gasto-receita.service';
 import { FormBaseDirective } from 'src/app/shared/form-base/form-base.directive';
 import { ValidacoesForm } from 'src/app/shared/validacoes-form';
-import { LoginPage } from 'src/app/login/login.page';
 
 @Component({
   selector: 'app-adicionar',
@@ -80,13 +79,9 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
     })
 
     this.service.salvar(this.form.value).subscribe(
-      resposta => {
-        this.mensagemSucesso()
-        console.log(resposta)
-      },
+      () => this.mensagemSucesso(),
       () => this.mensagemErro()
     );
-    console.log(this.form.value)
   }
 
   cancelar(){
@@ -134,10 +129,6 @@ export class AdicionarComponent extends FormBaseDirective implements OnInit {
     } else if (this.route.snapshot.url[0].path == 'editar') {
       this.adicionarOuEditar = 'editar'
     }
-  }
-
-  onSubmit(){
-    console.log(this.form)
   }
 
   validaValor(valor){
