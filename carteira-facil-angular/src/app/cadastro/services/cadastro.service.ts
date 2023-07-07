@@ -7,7 +7,7 @@ import { Cadastro } from '../model/cadastro';
 })
 export class CadastroService {
 
-  private readonly API = 'api/usuario';
+  private readonly API = 'http://192.168.1.5:8080/api/usuario';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -5,8 +5,8 @@ import { Location } from '@angular/common';
 import { format, parseISO } from 'date-fns';
 import { ActivatedRoute } from '@angular/router';
 import { GastoReceitaService } from '../../services/gasto-receita.service';
-import { FormBaseDirective } from 'src/app/shared/form-base/form-base.directive';
-import { ValidacoesForm } from 'src/app/shared/validacoes-form';
+import { FormBaseDirective } from '../../../shared/form-base/form-base.directive';
+import { ValidacoesForm } from '../../../shared/validacoes-form';
 
 @Component({
   selector: 'app-adicionar',

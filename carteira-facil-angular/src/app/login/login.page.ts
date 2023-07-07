@@ -12,14 +12,14 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  private usuario: Usuario = new Usuario();
+  usuario: Usuario = new Usuario();
   form: UntypedFormGroup;
   
 
   constructor(private formBuilder: UntypedFormBuilder,
     private service: AuthService,
     private router: Router,
-    private alerta: AlertController,
+    private alerta: AlertController
   ) { }
 
   ngOnInit() { 

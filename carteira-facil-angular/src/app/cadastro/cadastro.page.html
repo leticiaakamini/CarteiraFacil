@@ -35,7 +35,7 @@
         </ion-item>
         <ion-item>
           <ion-input id="senha" type="password" formControlName="senha" placeholder="Nova senha"></ion-input>
-          <app-mensagem-erro [control]="form.get('senha')" label="Senha"></app-mensagem-erro>
+          <!-- <app-mensagem-erro [control]="$any(form.get('senha'))" label="Senha"></app-mensagem-erro> -->
           <app-controle-erro [mostrarErro]="verificaSenha('senha')"
             mensagemErro="Senha inválida!">
           </app-controle-erro>
@@ -53,7 +53,5 @@
         Cadastre-se
       </ion-button>
     </form>
-    
-    
   </div>
 </ion-content>

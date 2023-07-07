@@ -1,18 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from './usuario';
-import { Router } from '@angular/router';
-import { CadastroService } from '../cadastro/services/cadastro.service';
-import { Cadastro } from '../cadastro/model/cadastro';
-import { GastoReceita } from '../gastos-receitas/model/gasto-receita';
-import { Desejo } from '../gastos-receitas/model/desejo';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly API = 'api/usuario';
+  private readonly API = 'http://192.168.1.5:8080/api/usuario';
 
   usuarioAutenticado: boolean;
 
@@ -23,13 +18,10 @@ export class AuthService {
   }
 
   fazerLogin(usuarioLogin: Usuario){
+    // let httpRequest = new XMLHttpRequest();
+    // httpRequest.open("POST", 'http://localhost:8080/api/usuario');
     return this.httpClient.post<Usuario>(this.API, usuarioLogin);
   }
-
-  // fazerLogin(usuarioLogin: Usuario){
-  //   let verificacao = this.httpClient.post<Usuario>(this.API, usuarioLogin);
-  //   return verificacao
-  // }
 
   usuarioEstaAutenticado(){
     return this.usuarioAutenticado;

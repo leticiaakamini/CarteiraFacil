@@ -1,5 +1,5 @@
 import { Directive, OnInit } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { FormGroup, UntypedFormGroup } from '@angular/forms';
 
 @Directive({
   selector: '[appFormBase]'

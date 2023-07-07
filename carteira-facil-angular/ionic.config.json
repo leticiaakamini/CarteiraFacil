@@ -1,7 +1,10 @@
 {
   "name": "carteiraDigital",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { FormBaseDirective } from 'src/app/shared/form-base/form-base.directive';
-import { ValidacoesForm } from 'src/app/shared/validacoes-form';
+import { FormBaseDirective } from '../../../shared/form-base/form-base.directive';
+import { ValidacoesForm } from '../../../shared/validacoes-form';
 import { DesejoService } from '../../services/desejo.service';
 import { ToastController } from '@ionic/angular';
 import { Location } from '@angular/common';
@@ -95,7 +95,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
         });
 
         this.setTipoDesejo(resposta.tipo);
-
+       
         this.calcularTotalViagem(resposta.hospedagem.toFixed(2), 'hospedagem')
         this.calcularTotalViagem(resposta.alimentacao.toFixed(2), 'alimentacao')
         this.calcularTotalViagem(resposta.passagem.toFixed(2), 'passagem')
@@ -149,8 +149,6 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
       () => this.mensagemSucesso(),
       () => this.mensagemErro()
     );
-
-    console.log(this.form.value)
   }
 
   verificaCampoVazio(campo: string) {
@@ -184,7 +182,14 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
     await toast.present();
   }
 
-  calcularTotalViagem(valor: string, campo: string) {
+  calcularTotalViagem(event, campo: string) {
+    let valor;
+    if (typeof(event) == 'string') {
+      valor = event;
+    } else {
+      valor = event.target.value;
+    }
+    
     if (this.form.get(campo).valid) {
       for (const element of this.camposViagem) {
         if (element[0] == campo && element[1] != '') {
@@ -195,7 +200,7 @@ export class AdicionarDesejoComponent extends FormBaseDirective implements OnIni
           if (valor == '') {
             valor = "0.00"
           }
-          valor = valor.replace(",", ".");
+          valor = valor.replace(',', '.');
           element[1] = valor;
           this.totalViagem = this.totalViagem + parseFloat(valor);
           this.totalViagemFormatado = this.totalViagem.toFixed(2);

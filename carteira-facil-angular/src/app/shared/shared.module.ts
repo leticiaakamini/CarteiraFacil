@@ -4,9 +4,6 @@ import { ControleErroComponent } from './controle-erro/controle-erro.component';
 import { MensagemErroComponent } from './mensagem-erro/mensagem-erro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { FormBaseDirective } from './form-base/form-base.directive';
-
-
 
 @NgModule({
   declarations: [

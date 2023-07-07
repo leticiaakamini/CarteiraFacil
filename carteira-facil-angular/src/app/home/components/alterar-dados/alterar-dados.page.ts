@@ -2,9 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { Cadastro } from 'src/app/cadastro/model/cadastro';
-import { CadastroService } from 'src/app/cadastro/services/cadastro.service';
-import { ValidacoesForm } from 'src/app/shared/validacoes-form';
+import { CadastroService } from '../../../cadastro/services/cadastro.service';
+import { ValidacoesForm } from '../../../shared/validacoes-form';
 
 @Component({
   selector: 'app-alterar-dados',
@@ -48,10 +47,14 @@ export class AlterarDadosPage implements OnInit {
   }
 
   verificarAlterarSenha(event) {
-    this.alterarSenha = event;
+    let check = event.detail.checked;
+    this.alterarSenha = check;
   }
 
   atualizar() {
+    this.form.get('senha').enable();
+    this.form.get('novaSenha').enable();
+
     this.service.buscarPorId().subscribe(resposta => {
       if (this.alterarSenha) {
         if (this.form.get('senha').value != '' && this.form.get('novaSenha').value != '') {
