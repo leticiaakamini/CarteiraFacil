@@ -59,6 +59,7 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> fazerLogin(@RequestBody Usuario usuario){
         Cadastro usuarioAutenticado = usuarioRepository.usuarioAutenticado(usuario.getEmail(), usuario.getSenha());
+        
 
         if (Objects.isNull(usuarioAutenticado)) {
             return ResponseEntity.notFound().build();
