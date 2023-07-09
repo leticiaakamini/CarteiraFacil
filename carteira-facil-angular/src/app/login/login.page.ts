@@ -32,9 +32,20 @@ export class LoginPage implements OnInit {
 
   fazerLogin() {
     this.service.fazerLogin(this.usuario).subscribe(
-      () => this.navegar('/home'),
+      () => {
+        this.service.usuarioAutenticado = true;
+        this.navegar('/home');
+      },
       () => this.mostrarAlertaErro()
     )
+
+    // try{
+    //   await this.service.fazerLogin(this.usuario);
+    //   this.navegar('/home');      
+    // } catch (error) {
+    //   alert(error);
+    //   //this.mostrarAlertaErro();
+    // }
   }
 
   navegar(pagina: string) {

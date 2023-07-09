@@ -7,7 +7,7 @@ import { Desejo } from '../model/desejo';
 })
 export class DesejoService {
 
-  private readonly API = 'http://192.168.1.5:8080/api/desejo';
+  private readonly API = 'http://192.168.1.9:8080/api/desejo';
 
   constructor(private httpClient: HttpClient) { }
 

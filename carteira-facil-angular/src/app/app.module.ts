@@ -11,6 +11,7 @@ import { AuthService } from './login/auth.service';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { GastosReceitasModule } from './gastos-receitas/gastos-receitas.module';
 import { registerLocaleData } from '@angular/common';
+import { HTTP } from '@ionic-native/http/ngx';
 import localePt from '@angular/common/locales/pt';
 
 registerLocaleData(localePt);
@@ -35,7 +36,8 @@ registerLocaleData(localePt);
             useValue: 'pt-BR'
         },
         AuthService,
-        AuthGuardService
+        AuthGuardService,
+        HTTP
     ],
     bootstrap: [
         AppComponent
