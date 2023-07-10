@@ -7,7 +7,7 @@ import { GastoReceita } from '../model/gasto-receita';
 })
 export class GastoReceitaService {
 
-  private readonly API = 'http://192.168.1.9:8080/api/gasto-receita';
+  private readonly API = 'http://ec2-15-228-254-200.sa-east-1.compute.amazonaws.com:8080/api/gasto-receita';
 
   constructor(private httpClient: HttpClient) { }
 

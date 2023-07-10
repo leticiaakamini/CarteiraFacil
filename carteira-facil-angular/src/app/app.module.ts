@@ -12,6 +12,7 @@ import { AuthGuardService } from './guards/auth-guard.service';
 import { GastosReceitasModule } from './gastos-receitas/gastos-receitas.module';
 import { registerLocaleData } from '@angular/common';
 import { HTTP } from '@ionic-native/http/ngx';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 registerLocaleData(localePt);
@@ -27,13 +28,18 @@ registerLocaleData(localePt);
         HttpClientModule,
         GastosReceitasModule
     ],
-    providers: [{
-            provide: RouteReuseStrategy,
-            useClass: IonicRouteStrategy
-        },
+    providers: [
+        // {
+        //     provide: RouteReuseStrategy,
+        //     useClass: IonicRouteStrategy
+        // },
         {
             provide: LOCALE_ID,
             useValue: 'pt-BR'
+        },
+        {
+            provide: LocationStrategy,
+            useClass: HashLocationStrategy
         },
         AuthService,
         AuthGuardService,
